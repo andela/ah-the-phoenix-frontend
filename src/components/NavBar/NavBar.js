@@ -10,7 +10,6 @@ class NavBar extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-
   render() {
     const { activeItem } = this.state;
     const user = JSON.parse(localStorage.getItem("user"));
@@ -99,7 +98,5 @@ const mapStateToProps = (state) => {
     loginSuccess: state.loginReducer.loginSuccess
   }
 }
-
-
 
 export default connect(mapStateToProps)(NavBar);

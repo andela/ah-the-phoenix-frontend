@@ -208,13 +208,10 @@ class AuthForm extends Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => {
   return {
     isFetching: state.signupReducer.isFetching
   }
 }
-
 
 export default connect(mapStateToProps, { signupFunction })(AuthForm)
