@@ -9,6 +9,8 @@ import ReduxToastr from 'react-redux-toastr'
 import VerifyMail from './views/VerifyMail/VerifyMail';
 import PasswordReset from './views/PasswordReset/PasswordReset';
 import PasswordUpdate from './views/PasswordReset/PasswordUpdate';
+import Profile from './views/getProfile';
+import EditProfile from './views/editProfile';
 
 class App extends Component {
   render() {
@@ -34,10 +36,12 @@ class App extends Component {
               <Route exact path="/verify/:token" component={VerifyMail} />
               <Route exact path="/reset-password" component={PasswordReset} />
               <Route exact path="/update-password/:token" component={PasswordUpdate} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/edit_profile" component={EditProfile} />
             </Switch>
           </div>
           <ReduxToastr
-            timeOut={4000}
+            timeOut={2000}
             newestOnTop={false}
             preventDuplicates
             position="top-center"

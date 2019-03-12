@@ -27,6 +27,8 @@
     "react-scripts": "^2.1.5",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
+    "toastr": "^2.1.4",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0"
@@ -57,5 +59,11 @@
     "eslint-plugin-jsdoc": "^4.1.0",
     "eslint-plugin-react": "^7.12.4",
     "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js, jsx, ts, tsx}",
+      "!src/serviceWorker.js"
+    ]
   }
 }
