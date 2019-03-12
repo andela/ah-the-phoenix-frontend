@@ -20,7 +20,8 @@ const loginReducer = (state = initState, action) => {
                 ...state,
                 isFetching: action.isFetching,
                 loginSuccess: true,
-                payload: action.payload
+                payload: action.payload,
+                token: action.token
             }
         case LOGIN_FAILURE:
             return {
