@@ -13,7 +13,6 @@ export class Home extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {
@@ -21,6 +20,5 @@ const mapStateToProps = (state) => {
         loginSuccess: state.loginReducer.loginSuccess
     }
 }
-
 
 export default connect(mapStateToProps)(Home);
