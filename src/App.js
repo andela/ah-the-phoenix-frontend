@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Home from "./components/Home/Home"
+import Signup from "./views/Signup/Signup"
+import NavBar from './components/NavBar/NavBar'
+import { Divider } from 'semantic-ui-react'
+import ReduxToastr from 'react-redux-toastr'
+import VerifyMail from './views/VerifyMail/VerifyMail';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <header>
-            <h3>Authors haven</h3>
+          <NavBar />
+          <Divider />
+          <div className="app">
             <Switch>
-              <Route exact path="/" />
-              <Route path="/login" />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/verify/:token" component={VerifyMail} />
             </Switch>
-          </header>
+          </div>
+          <ReduxToastr
+            timeOut={4000}
+            newestOnTop={false}
+            preventDuplicates
+            position="top-center"
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            closeOnToastrClick />
         </div>
       </BrowserRouter>
     );
