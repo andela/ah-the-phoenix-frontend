@@ -48,7 +48,7 @@ class PasswordUpdateForm extends Component {
     render() {
         const { history, redirect, fetching } = this.props
         if (redirect){
-            history.push("/login")
+            window.location.replace("/login")
         }
         const { formState, formError } = this.state;
         return (

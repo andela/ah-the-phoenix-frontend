@@ -8,7 +8,6 @@ const resetRequest = () => ({ type: RESET_REQUEST, fetching: true });
 
 export const PasswordReset = email => (dispatch) => {
   dispatch(resetRequest());
-  console.log(window.location.href);
   axiosDefault.post('api/v1/users/password_reset/', { email })
     .then((res) => {
       dispatch(resetSuccess());
