@@ -8,7 +8,6 @@ import {
 } from 'semantic-ui-react'
 import passwordReset from "../../redux/actioncreators/passwordResetActions";
 import { connect } from 'react-redux'
-import { resetReducer } from '../../redux/reducers/resetReducer';
 
 class ResetForm extends Component {
     state = {

@@ -13,7 +13,8 @@ class NavBar extends Component {
   render() {
     const { activeItem } = this.state;
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
+    const token = localStorage.getItem("token");
+    if (token) {
       const options = [
         {
           key: 'user', icon: 'user', text: (

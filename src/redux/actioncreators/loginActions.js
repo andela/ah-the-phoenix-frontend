@@ -40,6 +40,8 @@ export const sociaLogin = (social_info) => dispatch => {
     axiosDefault.post('api/v1/social/login/', social_info)
         .then(res => {
             dispatch(socialSuccess())
+            localStorage.setItem("token", res.data.user.token);
+            window.location.replace('/');
             toastr.success("Welcome! ", "Success login");
         })
         .catch(error => {
