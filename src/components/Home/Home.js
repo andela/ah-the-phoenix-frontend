@@ -13,7 +13,6 @@ export class Home extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Auth from '../../components/AuthForm/AuthForm';
-import './Signup.scss'
+import './Signup.scss';
 
 
 const Signup = props => {
@@ -8,7 +8,7 @@ const Signup = props => {
     <div className="auth-form">
       <Auth authaction='signup' history={props.history} />
     </div>
-  )
+  );
 }
 
 export default Signup
