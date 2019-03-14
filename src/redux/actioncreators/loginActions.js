@@ -1,4 +1,7 @@
-import { SOCIAL_AUTH_FAILURE, SOCIAL_AUTH_REQUEST, SOCIAL_AUTH_SUCCESS } from '../actiontypes';
+import {
+    SOCIAL_AUTH_FAILURE, SOCIAL_AUTH_REQUEST, SOCIAL_AUTH_SUCCESS,
+    LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS
+} from '../actiontypes';
 import { axiosDefault } from '../../utils/axios_config';
 import { toastr } from 'react-redux-toastr'
 
@@ -16,6 +19,21 @@ const socialFailure = () => ({
     type: SOCIAL_AUTH_FAILURE,
     isFetching: false
 })
+const loginRequest = () => ({
+    type: LOGIN_REQUEST,
+    isFetching: true
+})
+
+const loginSuccess = (token) => ({
+    type: LOGIN_SUCCESS,
+    isFetching: false,
+    token: token
+})
+
+const loginFailure = () => ({
+    type: LOGIN_FAILURE,
+    isFetching: false
+})
 
 export const sociaLogin = (social_info) => dispatch => {
     dispatch(socialRequest())
@@ -27,5 +45,19 @@ export const sociaLogin = (social_info) => dispatch => {
         .catch(error => {
             dispatch(socialFailure())
             toastr.error("Error!", "Failed, try again")
+        })
+}
+
+
+export const login = (login_data) => dispatch => {
+    dispatch(loginRequest())
+    axiosDefault.post('api/v1/users/login/', login_data)
+        .then(res => {
+            toastr.success("Welcome! " + res.data.user.username)
+            dispatch(loginSuccess(res.data.user.token))
+        })
+        .catch(error => {
+            toastr.error("Error!", "Check your input details")
+            dispatch(loginFailure())
         })
 }

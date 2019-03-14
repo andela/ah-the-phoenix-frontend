@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 import { sociaLogin } from '../../redux/actioncreators/loginActions'
 import { connect } from 'react-redux'
 import Loader from '../../components/Loader/Loader'

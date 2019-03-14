@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Segment, Grid, Divider, Form, Button, Header, Message } from "semantic-ui-react";
 import './AuthForm.scss';
-import signupFunction from '../../redux/actioncreators/signupActions'
+import signupFunction from '../../redux/actioncreators/signupActions';
+import { login } from '../../redux/actioncreators/loginActions';
 import { connect } from 'react-redux'
 import Loader from '../Loader/Loader'
 import SocialAuth from '../../views/SocialAuth/SocialAuth'
@@ -20,6 +21,10 @@ class AuthForm extends Component {
     passwordErrors: { password: null },
     confirmErrors: { confirm_password: null },
     usernameErrors: { username: null }
+  }
+  handleLogin = (e) => {
+    e.preventDefault()
+    this.props.login({ "user": this.state })
   }
 
   handleSignup = (e) => {
@@ -87,7 +92,6 @@ class AuthForm extends Component {
       }
     }
     if (e.target.name === "confirmpassword") {
-      console.log(this.state)
       if (this.state.password !== e.target.value) {
         this.setState({
           formState: { confirm_password: true }, errors: true, confirmErrors: {
@@ -104,21 +108,31 @@ class AuthForm extends Component {
 
 
   render() {
-    const { authaction, isFetching } = this.props;
+    const { authaction, isFetching, isFetchingLogin } = this.props;
     const loginForm = () => {
       return (
-        <div>
-          <Form>
-            <Header textAlign="center" as='h3'><br />Login here</Header>
-            <br></br>
-            <Form.Input icon='user' iconPosition='left' label='Username' placeholder='Username/Email' required />
-            <Form.Input icon='lock' iconPosition='left' label='Password' placeholder='Password' type='password' required />
-
-            <Button fluid content='Login' type="submit" primary />
-            <br />
-
-          </Form>
-        </div>
+        <Form onSubmit={this.handleLogin} error>
+          <Header textAlign="center" as='h3'><br />Login here</Header>
+          <br></br>
+          <Form.Input icon='user' iconPosition='left' label='Email' name="email" placeholder='Email' type="email" onChange={this.handleChange} error={this.state.formState.email} />
+          <div>
+            <Message
+              error
+              className="errors"
+              content={this.state.emailErrors.email}
+            />
+          </div>
+          <Form.Input icon='lock' iconPosition='left' label='Password' type='password' name="password" placeholder="Password" onChange={this.handleChange} error={this.state.formState.password} />
+          <div>
+            <Message
+              error
+              className="errors"
+              content={this.state.passwordErrors.password}
+            />
+          </div>
+          <Button fluid disabled={this.state.errors ? true : false} content='Login' type="submit" className="ui green button" onClick={this.handleLogin} />
+          <br />
+        </Form>
       )
     }
 
@@ -180,7 +194,7 @@ class AuthForm extends Component {
       form = signupForm()
     }
 
-    if (isFetching === true) {
+    if (isFetching === true || isFetchingLogin === true) {
       return (
         <div>
           <Loader />
@@ -212,9 +226,9 @@ class AuthForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.signupReducer.isFetching
+    isFetching: state.signupReducer.isFetching,
+    isFetchingLogin: state.loginReducer.isFetching
   }
 }
 
-
-export default connect(mapStateToProps, { signupFunction })(AuthForm)
+export default connect(mapStateToProps, { login, signupFunction })(AuthForm)
