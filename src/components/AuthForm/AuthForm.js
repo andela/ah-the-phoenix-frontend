@@ -183,15 +183,14 @@ class AuthForm extends Component {
           </div>
           <Button disabled={this.state.errors ? true : false} fluid content='Signup' type="submit" primary />
           <br />
-        </Form>
+      </Form>
       )
     }
-    var form = null
-    if (authaction === "login") {
-      form = loginForm()
-    }
-    else if (authaction === "signup") {
-      form = signupForm()
+    let form = null;
+    if (authaction === 'login') {
+      form = loginForm();
+    } else if (authaction === 'signup') {
+      form = signupForm();
     }
 
     if (isFetching === true || isFetchingLogin === true) {
@@ -218,11 +217,9 @@ class AuthForm extends Component {
 
         <Divider vertical>Or</Divider>
       </Segment>
-    )
+    );
   }
 }
-
-
 
 const mapStateToProps = (state) => {
   return {

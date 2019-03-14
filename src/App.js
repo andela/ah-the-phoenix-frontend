@@ -7,6 +7,8 @@ import NavBar from './components/NavBar/NavBar'
 import { Divider } from 'semantic-ui-react'
 import ReduxToastr from 'react-redux-toastr'
 import VerifyMail from './views/VerifyMail/VerifyMail';
+import PasswordReset from './views/PasswordReset/PasswordReset';
+import PasswordUpdate from './views/PasswordReset/PasswordUpdate';
 
 class App extends Component {
   render() {
@@ -30,6 +32,8 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/verify/:token" component={VerifyMail} />
+              <Route exact path="/reset-password" component={PasswordReset} />
+              <Route exact path="/update-password/:token" component={PasswordUpdate} />
             </Switch>
           </div>
           <ReduxToastr
