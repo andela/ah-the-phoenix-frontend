@@ -54,12 +54,6 @@ export class SocialAuth extends Component {
             } else {
                 this.props.sociaLogin(site_details);
             }
-            let user_data = {
-                username: res.user.displayName,
-                email: res.user.email,
-                image: res.user.photoURL
-            }
-            localStorage.setItem("user", JSON.stringify(user_data));
 
         }).catch(err => {
             console.log(err);

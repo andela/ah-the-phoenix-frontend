@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Image, Dropdown } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './NavBar.scss'
 import { connect } from 'react-redux'
@@ -12,26 +12,10 @@ class NavBar extends Component {
 
   render() {
     const { activeItem } = this.state;
-    const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
     if (token) {
-      const options = [
-        {
-          key: 'user', icon: 'user', text: (
-            <span>
-              <strong>Profile</strong>
-            </span>
-          )
-        },
-        { key: 'settings', text: 'Settings', icon: 'settings' },
-        { key: 'sign-out', text: 'Sign Out', icon: 'sign out' },
-      ]
 
-      const trigger = (
-        <span>
-          <Image avatar src={user.image} /> {user.username}
-        </span>
-      )
+
 
       return (
 
@@ -45,11 +29,18 @@ class NavBar extends Component {
           />
 
           <Menu.Menu position='right' className="auth-menu">
-            <Menu.Item>
-              <Dropdown trigger={trigger} options={options} pointing='top left' icon={null} /></Menu.Item>
-
             <Menu.Item
-              icon='sign out'
+              name="Profile"
+              active={activeItem === 'profile'}
+              onClick={() => {
+                window.location.replace('/profile')
+              }}
+            >
+
+
+            </Menu.Item>
+            <Menu.Item
+              name="Logout"
               active={activeItem === 'logout'}
               onClick={() => {
                 firebase.auth().signOut();
