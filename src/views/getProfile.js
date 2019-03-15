@@ -12,15 +12,14 @@ export class Profile extends Component {
   }
 
   render() {
-    const { fetched } = this.props;
-    if (!fetched) {
+    const { isFetching } = this.props;
+    if (isFetching === true) {
       return (
         <div>
           <Loader />
         </div>
       );
     }
-
     return (
       <div>
         <ProfileCard />
@@ -29,8 +28,8 @@ export class Profile extends Component {
   }
 }
 const mapStateToProps = state => ({
-  fetched: state.profileReducer.fetched,
-  profile: state.profileReducer.profile,
+  isFetching: state.profileReducer.isFetching,
+  profile: state.profileReducer.profile
 });
 
 export default connect(mapStateToProps, {

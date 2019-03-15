@@ -14,11 +14,7 @@ class NavBar extends Component {
     const { activeItem } = this.state;
     const token = localStorage.getItem("token");
     if (token) {
-
-
-
       return (
-
         <Menu secondary className="navbar">
           <Menu.Item
             name='Authors Haven'
@@ -32,9 +28,8 @@ class NavBar extends Component {
             <Menu.Item
               name="Profile"
               active={activeItem === 'profile'}
-              onClick={() => {
-                window.location.replace('/profile')
-              }}
+              as={Link} to='/profile'
+              onClick={this.handleItemClick}
             >
 
 
