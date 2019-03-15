@@ -132,6 +132,11 @@ class AuthForm extends Component {
           </div>
           <Button fluid disabled={this.state.errors ? true : false} content='Login' type="submit" className="ui green button" onClick={this.handleLogin} />
           <br />
+          <Form.Field>
+            <a href="/reset-password" onClick={() => {
+              window.location.replace('/reset-password')
+            }}>Forgot Password?</a>
+          </Form.Field>
         </Form>
       )
     }
