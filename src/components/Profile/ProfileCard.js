@@ -11,7 +11,7 @@ export class ProfileCard extends Component {
         const { profile } = this.props;
         console.log(profile);
 
-        const profileCard = () => (profile ? (
+        const profileCard = () => (Object.keys(profile).length !== 0 ? (
             <Card className="profile-card">
                 <Grid className="profile-grid">
                     <Grid.Column width={4}>
@@ -50,11 +50,11 @@ export class ProfileCard extends Component {
                 </Grid>
 
             </Card>
-            
-            
-        ) 
-        
-        : (
+
+
+        )
+
+            : (
                 null
             ));
         return (
