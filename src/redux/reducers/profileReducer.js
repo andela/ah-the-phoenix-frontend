@@ -4,8 +4,8 @@ import {
 } from '../actiontypes';
 
 const initialState = {
-  fetched: false,
-  profile: {},
+  isFetching: false,
+  profile: {}
 };
 
 
@@ -14,34 +14,34 @@ const profileReducer = (state = initialState, action) => {
     case PROFILE_REQUEST:
       return {
         ...state,
-        fetched: false,
+        isFetching: true,
       };
     case PROFILE_SUCCESS:
       return {
         ...state,
         profile: action.payload,
-        fetched: true,
+        isFetching: false,
       };
     case PROFILE_FAILURE:
       return {
         ...state,
-        fetched: true,
+        isFetching: false,
       };
     case EDIT_PROFILE_REQUEST:
       return {
         ...state,
-        fetched: false,
+        isFetching: true,
       };
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
         profile: action.payload,
-        fetched: true,
+        isFetching: false,
       };
     case EDIT_PROFILE_FAILURE:
       return {
         ...state,
-        fetched: true,
+        isFetching: false,
       };
     default:
       return state;

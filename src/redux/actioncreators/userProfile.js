@@ -17,7 +17,6 @@ export const profileFailure = () => ({
 });
 
 export const getProfile = () => (dispatch) => {
-  console.log(localStorage.getItem('token'));
   dispatch(profileRequest());
   axios.get('https://cors-anywhere.herokuapp.com/https://ah-the-phoenix-staging.herokuapp.com/api/v1/user/', {
     headers: {
@@ -27,12 +26,10 @@ export const getProfile = () => (dispatch) => {
 
   })
     .then((res) => {
-      console.log(res);
       dispatch(profileSuccess(res.data.user));
       toastr.success('Success', 'Profile retrieved successfully');
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch(profileFailure());
       toastr.error('Profile retrieval failed', 'Profile failed. Check details');
     });

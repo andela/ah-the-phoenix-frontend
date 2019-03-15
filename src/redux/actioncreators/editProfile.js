@@ -24,12 +24,11 @@ export const editProfile = edit_data => (dispatch) => {
     },
   })
     .then((res) => {
-      console.log(res.data);
       dispatch(editProfileSuccess(res.data.user));
       toastr.success('Success', 'Profile updated successfully');
+      window.location.replace("/profile")
     })
     .catch((err) => {
-      console.log(err.res);
       dispatch(editProfileFailure());
       toastr.error('Profile edit failed', 'Profile edit failed. Check details');
     });

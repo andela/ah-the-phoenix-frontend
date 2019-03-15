@@ -13,21 +13,21 @@ const loginReducer = (state = initState, action) => {
         case LOGIN_REQUEST:
             return {
                 ...state,
-                isFetching: action.isFetching
+                isFetching: action.isFetching,
+                loginSuccess: false
             }
         case LOGIN_SUCCESS:
             return {
                 ...state,
                 isFetching: action.isFetching,
                 loginSuccess: true,
-                payload: action.payload,
                 token: action.token
             }
         case LOGIN_FAILURE:
             return {
                 ...state,
                 isFetching: action.isFetching,
-                error: action.payload
+                loginSuccess: false
             }
         case SOCIAL_AUTH_REQUEST:
             return {
