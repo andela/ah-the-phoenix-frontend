@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Button, Card, Header } from 'semantic-ui-react';
-import { getProfile } from '../../redux/actioncreators/userProfile';
 import { editProfile } from '../../redux/actioncreators/editProfile';
 import { connect } from 'react-redux';
 import './profile.scss';
@@ -8,14 +7,13 @@ import uploader from '../../helpers/uploader';
 
 export class EditProfileForm extends Component {
     state = {
-        name: '',
+        username: '',
         bio: '',
         image: '',
-        uploadedImage:null
+        uploadedImage: null
     }
     componentDidMount() {
-        const { getProfile, profile } = this.props;
-        getProfile()
+        const { profile } = this.props;
         this.setState({
             username: profile.username,
             bio: profile.bio,
@@ -32,11 +30,11 @@ export class EditProfileForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const user = {
-            name: this.state.username,
+            username: this.state.username,
             bio: this.state.bio,
-            image:this.state.uploadedImage || this.state.image
+            image: this.state.uploadedImage || this.state.image
         }
-        this.props.editProfile({ "user": user } || {"user": this.state}  )
+        this.props.editProfile({ "user": user } || { "user": this.state })
     }
     fileSelectHandler = (event) => {
         const selectedFile = event.target.files[0];
@@ -93,4 +91,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getProfile, editProfile })(EditProfileForm)
+export default connect(mapStateToProps, { editProfile })(EditProfileForm)
