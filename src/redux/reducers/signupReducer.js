@@ -1,6 +1,6 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actiontypes'
 
-const initState = {
+export const initState = {
     isFetching: false
 }
 

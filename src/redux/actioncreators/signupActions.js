@@ -3,19 +3,19 @@ import { toastr } from 'react-redux-toastr'
 import { axiosDefault } from '../../utils/axios_config'
 
 
-const signupRequest = () => ({
+export const signupRequest = () => ({
     type: SIGNUP_REQUEST
 });
 
-const signupSuccess = () => ({
+export const signupSuccess = () => ({
     type: SIGNUP_SUCCESS
 });
 
-const signupFailure = () => ({
+export const signupFailure = () => ({
     type: SIGNUP_FAILURE
 });
 
-const signupFunction = (userData) => dispatch => {
+export const signupFunction = (userData) => dispatch => {
     dispatch(signupRequest());
     axiosDefault.post(`api/v1/users/`, { "user": userData },
     )
