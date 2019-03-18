@@ -2,9 +2,9 @@ import { toastr } from 'react-redux-toastr';
 import { RESET_FAILURE, RESET_SUCCESS, RESET_REQUEST } from '../actiontypes';
 import { axiosDefault } from '../../utils/axios_config';
 
-const resetSuccess = () => ({ type: RESET_SUCCESS, fetching: false });
-const resetFailure = () => ({ type: RESET_FAILURE, fetching: false });
-const resetRequest = () => ({ type: RESET_REQUEST, fetching: true });
+export const resetSuccess = () => ({ type: RESET_SUCCESS, fetching: false });
+export const resetFailure = () => ({ type: RESET_FAILURE, fetching: false });
+export const resetRequest = () => ({ type: RESET_REQUEST, fetching: true });
 
 export const PasswordReset = email => (dispatch) => {
   dispatch(resetRequest());

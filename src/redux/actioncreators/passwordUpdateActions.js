@@ -2,9 +2,9 @@ import { toastr } from 'react-redux-toastr';
 import { axiosDefault } from '../../utils/axios_config';
 import { PWD_UPDATE_FAILURE, PWD_UPDATE_SUCCESS, PWD_UPDATE_REQUEST } from '../actiontypes';
 
-const updateSuccess = () => ({ type: PWD_UPDATE_SUCCESS, fetching: false });
-const updateFailure = () => ({ type: PWD_UPDATE_FAILURE, fetching: false });
-const updateRequest = () => ({ type: PWD_UPDATE_REQUEST, fetching: true });
+export const updateSuccess = () => ({ type: PWD_UPDATE_SUCCESS, fetching: false });
+export const updateFailure = () => ({ type: PWD_UPDATE_FAILURE, fetching: false });
+export const updateRequest = () => ({ type: PWD_UPDATE_REQUEST, fetching: true });
 
 export const PasswordUpdate = (password, confirmPassword) => (dispatch) => {
   const urlArray = window.location.href.split('/');
