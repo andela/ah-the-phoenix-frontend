@@ -11,7 +11,10 @@ describe('login actions', () => {
     })
 
     it('should login successfully', () => {
-        const user = "{sufuduneun}"
+        const user = {
+            email: "ha@jsn.sokf",
+            token: "aindii"
+        }
         const expectedAction = {
             type: types.LOGIN_SUCCESS,
             user: user,

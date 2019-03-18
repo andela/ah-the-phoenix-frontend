@@ -5,7 +5,7 @@ import CreateEditArticle from '../../components/CreateEditArticle/CreateEditArti
 const AddArticle = () => {
     return (
         <div>
-            <CreateEditArticle />
+            <CreateEditArticle action="create" />
         </div>
     )
 }

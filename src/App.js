@@ -15,6 +15,7 @@ import ListArticles from "./components/Articles/ListArticles";
 import "./index.scss"
 import Article from './components/Articles/Article';
 import AddArticle from './views/AddArticle/AddArticle';
+import EditArticle from './views/EditArticle/EditArticle';
 
 class App extends Component {
   render() {
@@ -31,11 +32,12 @@ class App extends Component {
               <Route exact path="/verify/:token" component={VerifyMail} />
               <Route exact path="/reset-password" component={PasswordReset} />
               <Route exact path="/update-password/:token" component={PasswordUpdate} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/edit_profile" component={EditProfile} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/edit_profile" component={EditProfile} />
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/:slug" component={Article} />
               <Route exact path="/create_article" component={AddArticle} />
+              <Route path="/articles/:slug/edit_article/" component={EditArticle} />
             </Switch>
           </div>
           <ReduxToastr

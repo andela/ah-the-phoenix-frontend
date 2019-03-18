@@ -25,43 +25,42 @@ export const loginRequest = () => ({
   isFetching: true
 });
 
-export const loginSuccess = user => ({
-  type: LOGIN_SUCCESS,
-  isFetching: false,
-  user: user
-});
+export const loginSuccess = (user) => ({
+    type: LOGIN_SUCCESS,
+    isFetching: false,
+    user
+})
 
 export const loginFailure = () => ({
   type: LOGIN_FAILURE,
   isFetching: false
 });
 
-export const sociaLogin = social_info => dispatch => {
-  dispatch(socialRequest());
-  axiosDefault
-    .post("api/v1/social/login/", social_info)
-    .then(res => {
-      dispatch(socialSuccess());
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      window.location.replace("/");
-      toastr.success("Welcome! ", "Success login");
-    })
-    .catch(error => {
-      dispatch(socialFailure());
-      toastr.error("Error!", "Failed, try again");
-    });
-};
+export const sociaLogin = (social_info) => dispatch => {
+    dispatch(socialRequest())
+    axiosDefault.post('api/v1/social/login/', social_info)
+        .then(res => {
+            dispatch(socialSuccess())
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+            window.location.replace('/');
+            toastr.success("Welcome! ", "Success login");
+        })
+        .catch(error => {
+            dispatch(socialFailure())
+            toastr.error("Error!", "Failed, try again")
+        })
+}
 
-export const login = login_data => dispatch => {
-  dispatch(loginRequest());
-  axiosDefault
-    .post("api/v1/users/login/", login_data)
-    .then(res => {
-      toastr.success("Welcome! " + res.data.user.username);
-      dispatch(loginSuccess(res.data.user));
-    })
-    .catch(error => {
-      toastr.error("Error!", "Check your input details");
-      dispatch(loginFailure());
-    });
-};
+
+export const login = (login_data) => dispatch => {
+    dispatch(loginRequest())
+    axiosDefault.post('api/v1/users/login/', login_data)
+        .then(res => {
+            toastr.success("Welcome! " + res.data.user.username)
+            dispatch(loginSuccess(res.data.user))
+        })
+        .catch(error => {
+            toastr.error("Error!", "Check your input details")
+            dispatch(loginFailure())
+        })
+}

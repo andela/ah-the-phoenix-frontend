@@ -27,6 +27,7 @@ class NavBar extends Component {
           <Menu.Menu position="right" className="auth-menu">
             <Menu.Item
               name="Create Article"
+              icon="pencil"
               active={activeItem === 'Create Article'}
               as={Link} to='/create_article'
               onClick={this.handleItemClick}
@@ -34,13 +35,16 @@ class NavBar extends Component {
 
             <Menu.Item
               name="Profile"
+              icon="user"
               active={activeItem === 'Profile'}
-              as={Link} to='/profile'   
+              as={Link} to='/profile'
               onClick={this.handleItemClick}
-            />
+            >
+            </Menu.Item>
             <Menu.Item
               name="Logout"
-              active={activeItem === "logout"}
+              icon="sign-out"
+              active={activeItem === 'logout'}
               onClick={() => {
                 firebase.auth().signOut();
                 localStorage.clear();
@@ -67,14 +71,15 @@ class NavBar extends Component {
               as={Link}
               to="/signup"
               className="signup-btn"
-              active={activeItem === "signup"}
+              icon="signup"
+              active={activeItem === 'signup'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="Login"
-              as={Link}
-              to="/login"
-              active={activeItem === "login"}
+              name='Login'
+              as={Link} to='/login'
+              icon="sign-in"
+              active={activeItem === 'login'}
               onClick={this.handleItemClick}
             />
           </Menu.Menu>
