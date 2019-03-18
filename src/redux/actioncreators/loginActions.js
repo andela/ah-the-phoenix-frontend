@@ -45,8 +45,6 @@ export const sociaLogin = (social_info) => dispatch => {
             toastr.success("Welcome! ", "Success login");
         })
         .catch(error => {
-            console.log(error.request.response
-            )
             dispatch(socialFailure())
             toastr.error("Error!", "Failed, try again")
         })
