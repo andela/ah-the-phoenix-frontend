@@ -6,18 +6,15 @@ import { axiosDefault } from '../../utils/axios_config';
 import { toastr } from 'react-redux-toastr'
 
 export const socialRequest = () => ({
-    type: SOCIAL_AUTH_REQUEST,
-    isFetching: true
+    type: SOCIAL_AUTH_REQUEST
 })
 
 export const socialSuccess = () => ({
-    type: SOCIAL_AUTH_SUCCESS,
-    isFetching: false
+    type: SOCIAL_AUTH_SUCCESS
 })
 
 export const socialFailure = () => ({
-    type: SOCIAL_AUTH_FAILURE,
-    isFetching: false
+    type: SOCIAL_AUTH_FAILURE
 })
 export const loginRequest = () => ({
     type: LOGIN_REQUEST,

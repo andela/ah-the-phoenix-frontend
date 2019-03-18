@@ -3,12 +3,12 @@ import {
     LOGIN_SUCCESS, LOGIN_FAILURE
 } from '../actiontypes';
 
-const initState = {
+export const initState = {
     isFetching: false,
     loginSuccess: false
 }
 
-const loginReducer = (state = initState, action) => {
+export const loginReducer = (state = initState, action) => {
     switch (action.type) {
         case LOGIN_REQUEST:
             return {
@@ -32,18 +32,18 @@ const loginReducer = (state = initState, action) => {
         case SOCIAL_AUTH_REQUEST:
             return {
                 ...state,
-                isFetching: action.isFetching
+                isFetching: true
             }
         case SOCIAL_AUTH_SUCCESS:
             return {
                 ...state,
-                isFetching: action.isFetching,
+                isFetching: false,
                 loginSuccess: true
             }
         case SOCIAL_AUTH_FAILURE:
             return {
                 ...state,
-                isFetching: action.isFetching,
+                isFetching: false,
                 loginSuccess: false
             }
 
