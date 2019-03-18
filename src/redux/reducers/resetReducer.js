@@ -1,6 +1,6 @@
 import { RESET_FAILURE, RESET_SUCCESS, RESET_REQUEST } from '../actiontypes';
 
-const initialState = {
+export const initialState = {
   fetching: false,
 };
 

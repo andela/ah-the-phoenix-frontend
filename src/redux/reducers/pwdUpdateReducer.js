@@ -1,6 +1,6 @@
 import { PWD_UPDATE_FAILURE, PWD_UPDATE_SUCCESS, PWD_UPDATE_REQUEST } from '../actiontypes';
 
-const initialState = {
+export const initialState = {
   fetching: false,
 };
 
