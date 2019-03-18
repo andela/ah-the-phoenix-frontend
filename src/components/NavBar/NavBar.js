@@ -20,14 +20,20 @@ class NavBar extends Component {
             name='Authors Haven'
             className="head-title"
             as={Link} to='/'
-            active={activeItem === 'home'}
             onClick={this.handleItemClick}
           />
 
           <Menu.Menu position='right' className="auth-menu">
             <Menu.Item
+              name="Create Article"
+              active={activeItem === 'Create Article'}
+              as={Link} to='/create_article'
+              onClick={this.handleItemClick}
+            ></Menu.Item>
+
+            <Menu.Item
               name="Profile"
-              active={activeItem === 'profile'}
+              active={activeItem === 'Profile'}
               as={Link} to='/profile'
               onClick={this.handleItemClick}
             >

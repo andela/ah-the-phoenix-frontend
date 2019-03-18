@@ -6,6 +6,7 @@ import { login } from '../../redux/actioncreators/loginActions';
 import { connect } from 'react-redux'
 import Loader from '../Loader/Loader'
 import SocialAuth from '../../views/SocialAuth/SocialAuth'
+import { makeValidations } from '../../helpers/SignupValidate'
 
 
 
@@ -40,72 +41,54 @@ class AuthForm extends Component {
 
 
   handleChange = (e) => {
-    if (e.target.name === "username") {
-      let user = e.target.value;
-      let regex = /\d/g;
-      if (user.length < 2) {
-        this.setState({ ...this.state, errors: true, formState: { username: true }, usernameErrors: { username: "Username must be more than 2 characters" } })
-      }
-      else if (regex.test(user)) {
-        this.setState({ ...this.state, errors: true, formState: { username: true }, usernameErrors: { username: "Username should not contain numbers" } })
-      }
-      else {
-        this.setState({ [e.target.name]: e.target.value, errors: null, formState: { username: null }, usernameErrors: { username: null } })
-      }
-    }
-    if (e.target.name === "email") {
-      const regex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      const emailValid = regex.test(String(e.target.value).toLowerCase())
-      if (!emailValid) {
-        this.setState({ ...this.state, formState: { email: true }, errors: true, emailErrors: { email: "Please enter a valid email" } })
-      }
-      else {
-        this.setState({ [e.target.name]: e.target.value, errors: null, formState: { email: null }, emailErrors: { email: null } })
-      }
-    }
-    if (e.target.name === "password") {
-      let pass = e.target.value;
-      if (pass.length < 8) {
+    if (e.target.name === "username" || e.target.name === "password" || e.target.name === "email") {
+      let result = makeValidations(e.target.name, e.target.value);
+      if (result.name === "username") {
         this.setState({
-          formState: { password: true }, errors: true, passwordErrors: {
-            password: "password cannot be less than 8 characters"
-          }
+          ...this.state,
+          username: result.val,
+          formState: result.formState,
+          errors: result.errors,
+          usernameErrors: result.usernameErrors
         })
       }
-
-      else if (pass.length > 50) {
+      if (result.name === "email") {
         this.setState({
-          formState: { password: true }, errors: true, passwordErrors: {
-            password: "password cannot be greater than 50 characters"
-          }
+          ...this.state,
+          email: result.val,
+          formState: result.formState,
+          errors: result.errors,
+          emailErrors: result.emailErrors
         })
       }
-      else if (!pass.match(/^(?=.{8,}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*/)) {
+      if (result.name === "password") {
         this.setState({
-          formState: { password: true }, errors: true, passwordErrors: {
-            password: "please consider a password that has a number, an uppercase letter, lowercase letter and a special character"
-          }
+          ...this.state,
+          password: result.val,
+          formState: result.formState,
+          errors: result.errors,
+          passwordErrors: result.passwordErrors
         })
-      }
-      else {
-        this.setState({ [e.target.name]: e.target.value, errors: null, formState: { password: null }, passwordErrors: { password: null } })
       }
     }
     if (e.target.name === "confirmpassword") {
       if (this.state.password !== e.target.value) {
         this.setState({
-          formState: { confirm_password: true }, errors: true, confirmErrors: {
+          formState: { confirm_password: true },
+          errors: true, confirmErrors: {
             confirm_password: "Passwords do not match"
           }
         })
       }
       else {
-        this.setState({ [e.target.name]: e.target.value, errors: null, formState: { confirm_password: null }, confirmErrors: { confirm_password: null } })
+        this.setState({
+          [e.target.name]: e.target.value,
+          errors: null, formState: { confirm_password: null },
+          confirmErrors: { confirm_password: null }
+        })
       }
     }
-
   }
-
 
   render() {
     const { authaction, isFetching, isFetchingLogin } = this.props;
@@ -188,7 +171,7 @@ class AuthForm extends Component {
           </div>
           <Button disabled={this.state.errors ? true : false} fluid content='Signup' type="submit" primary />
           <br />
-      </Form>
+        </Form>
       )
     }
     let form = null;
