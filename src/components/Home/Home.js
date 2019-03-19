@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import './Home.scss';
 import { connect } from 'react-redux'
-
-const img = "https://res.cloudinary.com/dw675k0f5/image/upload/v1542661396/storo/book-book-pages-chapter-5834.jpg";
+import { getArticles } from "../../redux/actioncreators/listArticlesActions"
+import Loader from '../Loader/Loader';
+import { Item } from 'semantic-ui-react';
+import { articleContainer } from '../Articles/ArticlesContainer';
 
 export class Home extends Component {
+    componentDidMount = () => {
+        this.props.getArticles()
+    }
 
     render() {
-        return (
-            <div>
-                <img className="main-image" src={img} alt="Authors haven" />
-            </div>
-        )
+      const torender = () => this.props.articles.map(article => {
+        return articleContainer(article)
+      });
+      const form = torender()
+
+      const rendered = () => {
+        if (this.props.fetching){
+          return <Loader />
+        }
+        else{
+          return <Item.Group>{form}</Item.Group>
+        }
+      }
+
+      return (
+          <div>
+              {rendered()}
+          </div>
+      )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        loginSuccess: state.loginReducer.loginSuccess
-    }
+    return {fetching: state.listArticlesReducer.fetching, articles: state.listArticlesReducer.articles}
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, {getArticles})(Home)
