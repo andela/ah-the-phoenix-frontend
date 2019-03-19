@@ -52,7 +52,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-jest": "23.6.0",
+    "@babel/core": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
     "enzyme-to-json": "^3.3.5",
@@ -70,5 +71,8 @@
       "src/**/*.{js, jsx, ts, tsx}",
       "!src/serviceWorker.js"
     ]
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   }
 }
