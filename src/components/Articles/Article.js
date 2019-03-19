@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import { getArticle } from "../../redux/actioncreators/getArticleActions"
-import { connect } from 'react-redux'
-import { Loader, Container } from 'semantic-ui-react';
+import React, {Component} from 'react'
+import {getArticle} from "../../redux/actioncreators/getArticleActions"
+import {connect} from 'react-redux'
+import {Image, Container} from 'semantic-ui-react';
+import ReactHtmlParser from 'react-html-parser'
+import Loader from '../Loader/Loader';
 
 export class Article extends Component {
     componentDidMount() {
@@ -28,11 +30,15 @@ export class Article extends Component {
             return (
                 <div>
                     <Container text>
-                        <h1>{article.title}</h1>
-
-                        <p style={{ fontSize: "1.2em" }}>
-                            {article.body}
-                        </p>
+                    <h1>{article.title}</h1>
+                    <Image
+                            src={article.image ?
+                            article.image.slice(13)
+                            : "https://www.impossible.sg/wp-content/uploads/2013/11/seo-article-writing.jpg"}
+                            size="large"/>
+                    <p style={{fontSize: "1.2em"}}>
+                        {ReactHtmlParser(article.body)}
+                    </p>
                     </Container>
 
                 </div>
@@ -48,7 +54,7 @@ export class Article extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { fetching: state.getArticleReducer.fetching, article: state.getArticleReducer.article }
+    return {fetching: state.getArticleReducer.fetching, article: state.getArticleReducer.article}
 }
 
-export default connect(mapStateToProps, { getArticle })(Article)
+export default connect(mapStateToProps, {getArticle})(Article)
