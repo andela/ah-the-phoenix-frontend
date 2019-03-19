@@ -18,15 +18,15 @@ describe("login reducer", () => {
         })
     })
     it("should return reducer state after login success", () => {
-        const token = "sinudsii"
+        const user = "{sinudsii}"
         expect(loginReducer({}, {
             type: types.LOGIN_SUCCESS,
             isFetching: false,
-            token: token
+            user: user
         })).toEqual({
             isFetching: false,
             loginSuccess: true,
-            token: token
+            user: user
         })
     })
     it("should return reducer state after login failure", () => {
