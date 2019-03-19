@@ -9,7 +9,6 @@ import './profile.scss';
 export class ProfileCard extends Component {
     render() {
         const { profile } = this.props;
-        console.log(profile);
 
         const profileCard = () => (Object.keys(profile).length !== 0 ? (
             <Card className="profile-card">

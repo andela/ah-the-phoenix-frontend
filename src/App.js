@@ -4,13 +4,16 @@ import Home from "./components/Home/Home"
 import Signup from "./views/Signup/Signup"
 import Login from './views/Login/Login'
 import NavBar from './components/NavBar/NavBar'
-import { Divider } from 'semantic-ui-react'
+import { Divider, List } from 'semantic-ui-react'
 import ReduxToastr from 'react-redux-toastr'
 import VerifyMail from './views/VerifyMail/VerifyMail';
 import PasswordReset from './views/PasswordReset/PasswordReset';
 import PasswordUpdate from './views/PasswordReset/PasswordUpdate';
 import Profile from './views/getProfile';
 import EditProfile from './views/editProfile';
+import ListArticles from "./components/Articles/ListArticles";
+import "./index.scss"
+import Article from './components/Articles/Article';
 
 class App extends Component {
   render() {
@@ -38,6 +41,8 @@ class App extends Component {
               <Route exact path="/update-password/:token" component={PasswordUpdate} />
               <Route path="/profile" component={Profile} />
               <Route path="/edit_profile" component={EditProfile} />
+              <Route exact path="/articles" component={ListArticles}/>
+              <Route exact path="/articles/:slug" component={Article} />
             </Switch>
           </div>
           <ReduxToastr
