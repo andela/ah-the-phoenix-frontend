@@ -8,6 +8,7 @@ import { pwdUpdateReducer } from './pwdUpdateReducer';
 import profileReducer from './profileReducer';
 import { listArticlesReducer } from "../reducers/listArticlesReducer";
 import { getArticleReducer } from "../reducers/getArticleReducer";
+import createArticleReducer from './createArticle'
 
 const rootReducer = combineReducers({
     verifyReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     profileReducer,
     listArticlesReducer,
     getArticleReducer,
+    createArticleReducer,
     toastr: toastrReducer,
 });
 

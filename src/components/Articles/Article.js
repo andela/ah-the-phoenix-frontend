@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {getArticle} from "../../redux/actioncreators/getArticleActions"
-import {connect} from 'react-redux'
-import {Segment, Loader, Container} from 'semantic-ui-react';
+import React, { Component } from 'react'
+import { getArticle } from "../../redux/actioncreators/getArticleActions"
+import { connect } from 'react-redux'
+import { Loader, Container } from 'semantic-ui-react';
 
 export class Article extends Component {
     componentDidMount() {
@@ -14,9 +14,9 @@ export class Article extends Component {
             if (this.props.fetching) {
                 return (<Loader
                     className={this.props.fetching
-                    ? "active"
-                    : "inactive"}
-                    size='large'/>)
+                        ? "active"
+                        : "inactive"}
+                    size='large' />)
             }
             if (!article.title) {
                 return (
@@ -28,11 +28,11 @@ export class Article extends Component {
             return (
                 <div>
                     <Container text>
-                    <h1>{article.title}</h1>
-                    
-                    <p style={{fontSize: "1.2em"}}>
-                        {article.body}
-                    </p>
+                        <h1>{article.title}</h1>
+
+                        <p style={{ fontSize: "1.2em" }}>
+                            {article.body}
+                        </p>
                     </Container>
 
                 </div>
@@ -48,7 +48,7 @@ export class Article extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {fetching: state.getArticleReducer.fetching, article: state.getArticleReducer.article}
+    return { fetching: state.getArticleReducer.fetching, article: state.getArticleReducer.article }
 }
 
-export default connect(mapStateToProps, {getArticle})(Article)
+export default connect(mapStateToProps, { getArticle })(Article)

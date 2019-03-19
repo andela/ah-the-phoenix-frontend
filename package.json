@@ -16,6 +16,7 @@
     "firebase": "^5.8.6",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
+    "react-ckeditor-component": "^1.1.0",
     "react-dom": "^16.8.3",
     "react-facebook-login": "^4.1.1",
     "react-firebaseui": "^3.1.2",
@@ -50,7 +51,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-jest": "^24.5.0",
+    "babel-jest": "23.6.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
     "enzyme-to-json": "^3.3.5",
@@ -60,7 +61,7 @@
     "eslint-plugin-jsdoc": "^4.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "jest": "^24.5.0",
+    "jest": "23.6.0",
     "redux-mock-store": "^1.5.3"
   },
   "jest": {
