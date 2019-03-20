@@ -1,29 +1,30 @@
-import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import './NavBar.scss'
-import { connect } from 'react-redux'
-import firebase from 'firebase';
+import React, { Component } from "react";
+import { Menu } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import "./NavBar.scss";
+import { connect } from "react-redux";
+import firebase from "firebase";
 
 class NavBar extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: "home" };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
     const { activeItem } = this.state;
-    const token = localStorage.getItem("token");
-    if (token) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
       return (
         <Menu secondary className="navbar">
           <Menu.Item
-            name='Authors Haven'
+            name="Authors Haven"
             className="head-title"
             as={Link} to='/'
+            active={activeItem === "home"}
             onClick={this.handleItemClick}
           />
 
-          <Menu.Menu position='right' className="auth-menu">
+          <Menu.Menu position="right" className="auth-menu">
             <Menu.Item
               name="Create Article"
               active={activeItem === 'Create Article'}
@@ -34,63 +35,59 @@ class NavBar extends Component {
             <Menu.Item
               name="Profile"
               active={activeItem === 'Profile'}
-              as={Link} to='/profile'
+              as={Link} to='/profile'   
               onClick={this.handleItemClick}
-            >
-
-
-            </Menu.Item>
+            />
             <Menu.Item
               name="Logout"
-              active={activeItem === 'logout'}
+              active={activeItem === "logout"}
               onClick={() => {
                 firebase.auth().signOut();
                 localStorage.clear();
-                window.location.replace('/');
+                window.location.replace("/");
               }}
             />
-
           </Menu.Menu>
         </Menu>
-      )
-    }
-    else {
-
+      );
+    } else {
       return (
         <Menu secondary className="navbar">
           <Menu.Item
-            name='Authors Haven'
+            name="Authors Haven"
             className="head-title"
-            as={Link} to='/'
-            active={activeItem === 'home'}
+            as={Link}
+            to="/"
+            active={activeItem === "home"}
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position='right' className="auth-menu">
+          <Menu.Menu position="right" className="auth-menu">
             <Menu.Item
-              name='Signup'
-              as={Link} to='/signup'
+              name="Signup"
+              as={Link}
+              to="/signup"
               className="signup-btn"
-              active={activeItem === 'signup'}
+              active={activeItem === "signup"}
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name='Login'
-              as={Link} to='/login'
-              active={activeItem === 'login'}
+              name="Login"
+              as={Link}
+              to="/login"
+              active={activeItem === "login"}
               onClick={this.handleItemClick}
             />
           </Menu.Menu>
         </Menu>
-      )
+      );
     }
-
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     loginSuccess: state.loginReducer.loginSuccess
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(NavBar);

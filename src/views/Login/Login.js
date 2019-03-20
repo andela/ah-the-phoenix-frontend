@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import AuthForm from '../../components/AuthForm/AuthForm';
-import './Login.scss';
-import Loader from '../../components/Loader/Loader';
-
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import AuthForm from "../../components/AuthForm/AuthForm";
+import "./Login.scss";
+import Loader from "../../components/Loader/Loader";
 
 export class Login extends Component {
-    render() {
-        const { isFetching, loginSuccess, token } = this.props;
-        if (loginSuccess === true) {
-            localStorage.setItem('token', token)
-            return <Redirect to="/" />
-        }
-        if (isFetching === true) {
-            return (
-                <div>
-                    <Loader />
-                </div>
-            )
-        }
-        return (
-            <div className="auth-form">
-                <AuthForm authaction='login' />
-            </div>
-        )
+  render() {
+    const { isFetching, loginSuccess, user } = this.props;
+    if (loginSuccess === true) {
+      localStorage.setItem("user", JSON.stringify(user));
+      return <Redirect to="/" />;
     }
-}
-const mapStateToProps = (state) => {
-    return {
-        isFetching: state.loginReducer.isFetching,
-        loginSuccess: state.loginReducer.loginSuccess,
-        token: state.loginReducer.token
+    if (isFetching === true) {
+      return (
+        <div>
+          <Loader />
+        </div>
+      );
     }
+    return (
+      <div className="auth-form">
+        <AuthForm authaction="login" />
+      </div>
+    );
+  }
 }
+const mapStateToProps = state => {
+  return {
+    isFetching: state.loginReducer.isFetching,
+    loginSuccess: state.loginReducer.loginSuccess,
+    user: state.loginReducer.user
+  };
+};
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(Login);

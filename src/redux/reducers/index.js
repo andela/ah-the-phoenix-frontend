@@ -1,26 +1,28 @@
-import { combineReducers } from 'redux';
-import { signupReducer } from '../reducers/signupReducer'
-import { reducer as toastrReducer } from 'react-redux-toastr'
-import loginReducer from '../reducers/loginReducer'
-import verifyReducer from '../reducers/VerifyMail'
-import { resetReducer } from './resetReducer';
-import { pwdUpdateReducer } from './pwdUpdateReducer';
-import profileReducer from './profileReducer';
+import { combineReducers } from "redux";
+import { signupReducer } from "../reducers/signupReducer";
+import { reducer as toastrReducer } from "react-redux-toastr";
+import loginReducer from "../reducers/loginReducer";
+import verifyReducer from "../reducers/VerifyMail";
+import { resetReducer } from "./resetReducer";
+import { pwdUpdateReducer } from "./pwdUpdateReducer";
+import profileReducer from "./profileReducer";
 import { listArticlesReducer } from "../reducers/listArticlesReducer";
 import { getArticleReducer } from "../reducers/getArticleReducer";
-import createArticleReducer from './createArticle'
+import createArticleReducer from "./createArticle";
+import { articleReducer } from "./articlesReducer";
 
 const rootReducer = combineReducers({
-    verifyReducer,
-    loginReducer,
-    signupReducer,
-    resetReducer,
-    pwdUpdateReducer,
-    profileReducer,
-    listArticlesReducer,
-    getArticleReducer,
-    createArticleReducer,
-    toastr: toastrReducer,
+  verifyReducer,
+  loginReducer,
+  signupReducer,
+  resetReducer,
+  pwdUpdateReducer,
+  profileReducer,
+  listArticlesReducer,
+  getArticleReducer,
+  createArticleReducer,
+  articleReducer,
+  toastr: toastrReducer
 });
 
 export default rootReducer;

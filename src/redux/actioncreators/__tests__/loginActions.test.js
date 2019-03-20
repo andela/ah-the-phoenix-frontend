@@ -11,13 +11,13 @@ describe('login actions', () => {
     })
 
     it('should login successfully', () => {
-        const token = "sufuduneun"
+        const user = "{sufuduneun}"
         const expectedAction = {
             type: types.LOGIN_SUCCESS,
-            token: token,
+            user: user,
             isFetching: false
         }
-        expect(actions.loginSuccess(token)).toEqual(expectedAction)
+        expect(actions.loginSuccess(user)).toEqual(expectedAction)
     })
 
     it('should return login failure', () => {
