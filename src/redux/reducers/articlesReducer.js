@@ -1,4 +1,7 @@
-import { DELETE_FAILURE, DELETE_REQUEST, DELETE_SUCCESS } from "../actiontypes";
+import {
+  DELETE_FAILURE, DELETE_REQUEST, DELETE_SUCCESS,
+  UPDATE_ARTICLE_FAILURE, UPDATE_ARTICLE_REQUEST, UPDATE_ARTICLE_SUCCESS
+} from "../actiontypes";
 
 const initState = {
   isFetching: false,
@@ -26,6 +29,23 @@ export const articleReducer = (state = initState, action) => {
         ...state,
         isFetching: false
       };
+    case UPDATE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case UPDATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        articles: state.articles.filter(article => article.id !== action.article_id)
+      }
+    case UPDATE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isFetching: false
+      }
+
     default:
       return state;
   }
