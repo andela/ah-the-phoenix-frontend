@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProfile } from '../redux/actioncreators/userProfile';
-import ProfileCard from '../components/Profile/ProfileCard';
-import Loader from '../components/Loader/Loader';
+import { getProfile } from '../../redux/actioncreators/userProfile';
+import ProfileCard from '../../components/Profile/ProfileCard';
+import Loader from '../../components/Loader/Loader';
+import { Container, Divider } from 'semantic-ui-react';
+import ProfileMenu from '../../components/Profile/ProfileMenu'
 
 
 export class Profile extends Component {
@@ -12,7 +14,7 @@ export class Profile extends Component {
   }
 
   render() {
-    const { isFetching } = this.props;
+    const { isFetching, profile } = this.props;
     if (isFetching === true) {
       return (
         <div>
@@ -22,7 +24,11 @@ export class Profile extends Component {
     }
     return (
       <div>
-        <ProfileCard />
+        <Container>
+          <ProfileCard />
+          <Divider />
+          <ProfileMenu author_id={profile.username} />
+        </Container>
       </div>
     );
   }
