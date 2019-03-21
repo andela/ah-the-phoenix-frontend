@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Form, Button, Card, Header } from "semantic-ui-react";
+import { Form, Button, Card, Header, Image } from "semantic-ui-react";
 import { editProfile } from "../../redux/actioncreators/editProfile";
 import { connect } from "react-redux";
 import "./profile.scss";
@@ -58,15 +58,17 @@ export class EditProfileForm extends Component {
               <br />
               <div>
                 {/* eslint-disable-next-line */}
-                <img
+                <Image
                   src={this.state.image.slice(13)}
                   style={{ height: "100px", width: "100px" }}
                   alt={this.state.username}
                   onClick={() => this.fileInput.click()}
+                  circular
                 />
                 {/* eslint-disable-next-line */}
                 <a onClick={() => this.fileInput.click()} />
               </div>
+              <Header as="h5">{this.state.username}</Header>
               <input
                 type="file"
                 onChange={this.fileSelectHandler}

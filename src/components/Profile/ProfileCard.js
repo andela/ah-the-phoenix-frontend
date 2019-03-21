@@ -14,7 +14,7 @@ export class ProfileCard extends Component {
             <Card className="profile-card">
                 <Grid className="profile-grid">
                     <Grid.Column width={5}>
-                        <Image src={profile.image.slice(13)} size="small" circular />
+                        <Image src={profile.image.slice(13)} size="small" style={{ height: "150px", width: "150px" }} circular />
                     </Grid.Column>
                     <Grid.Column width={8}>
                         <Header>My Profile</Header>

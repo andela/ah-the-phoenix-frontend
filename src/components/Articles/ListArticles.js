@@ -24,7 +24,7 @@ export class ListArticles extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isFetching: state.articlesReducer.fetching, articles: state.articlesReducer.articles }
+  return { isFetching: state.articlesReducer.isFetching, articles: state.articlesReducer.articles }
 }
 
 export default connect(mapStateToProps, { getArticles })(ListArticles)
