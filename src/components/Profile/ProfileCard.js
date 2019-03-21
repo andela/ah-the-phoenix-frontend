@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-    Card, Image, Grid, Icon, Button, Label,
+    Card, Image, Grid, Icon, Button, Label, Header
 } from 'semantic-ui-react';
 import './profile.scss';
 
@@ -13,28 +13,27 @@ export class ProfileCard extends Component {
         const profileCard = () => (Object.keys(profile).length !== 0 ? (
             <Card className="profile-card">
                 <Grid className="profile-grid">
-                    <Grid.Column width={4}>
-                        <Image src={profile.image.slice(13)} size="small" />
+                    <Grid.Column width={5}>
+                        <Image src={profile.image.slice(13)} size="small" style={{ height: "150px", width: "150px" }} circular />
                     </Grid.Column>
-                    <Grid.Column width={9}>
+                    <Grid.Column width={8}>
+                        <Header>My Profile</Header>
                         <Card.Content>
-                            <Card.Header as="h2">
-                                Name:
-                {profile.username}
+                            <b>Name: </b><Card.Header>
+                                {profile.username}
                             </Card.Header>
-                            <Card.Description as="h4">
-                                Bio:
-                {profile.bio}
+                            <b>Bio: </b><Card.Description>
+                                {profile.bio}
                             </Card.Description>
                         </Card.Content>
                         <br />
                         <Card.Content extra>
-                            <Label>
+                            <Label color="teal">
                                 <Icon name="user" />
                                 Followers:
                 <Label.Detail>{profile.followers_total}</Label.Detail>
                             </Label>
-                            <Label>
+                            <Label color="teal">
                                 <Icon name="user" />
                                 Following:
                 <Label.Detail>{profile.following_total}</Label.Detail>
@@ -43,7 +42,7 @@ export class ProfileCard extends Component {
                     </Grid.Column>
                     <Grid.Column>
                         <Card.Content>
-                            <Button as={Link} to="/edit_profile"><Icon name="edit" className="edit-profile" /></Button>
+                            <Button as={Link} color="blue" to="/edit_profile"><Icon name="edit" className="edit-profile" /></Button>
                         </Card.Content>
                     </Grid.Column>
                 </Grid>

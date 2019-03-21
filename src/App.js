@@ -9,8 +9,8 @@ import ReduxToastr from 'react-redux-toastr'
 import VerifyMail from './views/VerifyMail/VerifyMail';
 import PasswordReset from './views/PasswordReset/PasswordReset';
 import PasswordUpdate from './views/PasswordReset/PasswordUpdate';
-import Profile from './views/getProfile';
-import EditProfile from './views/editProfile';
+import Profile from './views/Profile/getProfile';
+import EditProfile from './views/Profile/editProfile';
 import ListArticles from "./components/Articles/ListArticles";
 import "./index.scss"
 import Article from './components/Articles/Article';
