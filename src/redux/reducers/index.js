@@ -8,6 +8,8 @@ import { pwdUpdateReducer } from "./pwdUpdateReducer";
 import profileReducer from "./profileReducer";
 import articlesReducer from "./articlesReducer";
 import ratingsReducer from "./ratingsReducer";
+import likeDislikeReducer from '../reducers/LikeDislike'
+
 
 const rootReducer = combineReducers({
   verifyReducer,
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
   profileReducer,
   articlesReducer,
   ratingsReducer,
-  toastr: toastrReducer
+  likeDislikeReducer,
+  toastr: toastrReducer,
 });
 
 export default rootReducer;
