@@ -6,7 +6,11 @@ describe("Like article reducer", () => {
         expect(likeDislikeReducer(undefined, {})).toEqual({
             isFetching: false,
             likeSuccess: false,
-            dislikeSuccess: false
+            dislikeSuccess: false,
+            dislike_status: null,
+            dislikes_count: null,
+            likes_count: null,
+            like_status: null
         })
     })
     it("should return reducer state after article like request", () => {

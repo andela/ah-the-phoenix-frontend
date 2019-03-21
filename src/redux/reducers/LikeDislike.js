@@ -6,7 +6,11 @@ import {
 const initState = {
     isFetching: false,
     likeSuccess: false,
-    dislikeSuccess: false
+    dislikeSuccess: false,
+    likes_count: null,
+    dislikes_count: null,
+    like_status: null,
+    dislike_status: null
 };
 
 export const likeDislikeReducer = (state = initState, action) => {

@@ -78,6 +78,9 @@ export class Article extends Component {
             <LikeDislike props={this.props} />
           )
         }
+        else {
+          return <LikeDislike disabled="true" props={this.props} />
+        }
       }
       return (
         <div>
