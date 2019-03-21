@@ -1,100 +1,166 @@
-import React, { Component } from 'react'
-import { getArticle } from "../../redux/actioncreators/getArticleActions"
+import React, { Component } from "react";
+import { getArticle } from "../../redux/actioncreators/getArticleActions";
 import { deleteArticle } from "../../redux/actioncreators/deleteArticle";
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { Image, Segment, Button, Container, Divider, Item } from 'semantic-ui-react';
-import ReactHtmlParser from 'react-html-parser'
-import Loader from '../Loader/Loader';
-import './Article.scss'
+import { rateArticle } from "../../redux/actioncreators/postRatingActions";
+import { averageRating } from "../../redux/actioncreators/getRatingActions";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  Image,
+  Segment,
+  Button,
+  Container,
+  Divider,
+  Item,
+  Rating
+} from "semantic-ui-react";
+import ReactHtmlParser from "react-html-parser";
+import Loader from "../Loader/Loader";
+import "./Article.scss";
 
 export class Article extends Component {
-    componentDidMount() {
-        this.props.getArticle()
+  state = {};
+  componentDidMount() {
+    this.props.getArticle();
+    this.props.averageRating();
+  }
+  handleDelete = (e, article_slug) => {
+    e.preventDefault();
+    this.props.deleteArticle(article_slug);
+  };
+
+  handleClick = (e, article_slug) => {
+    e.preventDefault();
+    this.props.rateArticle(article_slug);
+  };
+
+  handleRate = (e, { rating }) => {
+    console.log(rating);
+    this.props.rateArticle(rating);
+  };
+
+  render() {
+    const { article } = this.props;
+    const edit_link = "/articles/" + article.slug + "/edit_article/";
+    const user = JSON.parse(localStorage.getItem("user"));
+    let editdeleteOptions = null;
+    if (Object.keys(article).length !== 0 && user) {
+      editdeleteOptions =
+        user.username === article.author.username ? (
+          <Container textAlign="right">
+            <Button
+              size="mini"
+              as={Link}
+              to={edit_link}
+              content="Edit"
+              icon="edit"
+              color="blue"
+            />
+            <Button
+              size="mini"
+              content="Delete"
+              color="red"
+              icon="delete"
+              onClick={e => {
+                this.handleDelete(e, article.slug);
+              }}
+            />
+          </Container>
+        ) : null;
     }
-    handleDelete = (e, article_slug) => {
-        e.preventDefault();
-        this.props.deleteArticle(article_slug);
-    };
-    render() {
-        const { article } = this.props
-        const edit_link = "/articles/" + article.slug + "/edit_article/";
-        const user = JSON.parse(localStorage.getItem("user"))
-        let editdeleteOptions = null
-        if (Object.keys(article).length !== 0 && user) {
-            editdeleteOptions = user.username === article.author.username ? (
-                <Container textAlign='right'>
-                    <Button size="mini" as={Link} to={edit_link} content="Edit" icon="edit" color='blue' />
-                    <Button size="mini" content="Delete" color='red' icon="delete"
-                        onClick={e => { this.handleDelete(e, article.slug) }} />
-                </Container>
-            ) : (
-                    null
-                )
-        }
-        const articleRender = () => {
-            const { isFetching } = this.props
-            if (isFetching) {
-                return (<Loader />)
-            }
-            if (!article.title) {
-                return (
-                    <div>
-                        <h1>Article Not Found</h1>
-                    </div>
-                )
-            }
-            return (
-                <div>
-                    <Segment className="articledetail">
-                        {editdeleteOptions}
-                        <Item.Group>
-                            <Item>
-                                <Item.Content>
-                                    <Item.Header>
-                                        <h1 className="article-title">{article.title}</h1>
-                                    </Item.Header>
-                                    <br></br>
-                                    <Item.Meta>
-                                        <Image className="ui avatar image" src={article.author.image.slice(13)} />
-                                        <span>{article.author.username}</span>
-                                    </Item.Meta>
-                                    <br></br>
-                                    <Item.Description>
-                                        <Image className="topImage"
-                                            src={article.image ?
-                                                article.image.slice(13)
-                                                : "https://www.impossible.sg/wp-content/uploads/2013/11/seo-article-writing.jpg"}
-                                        />
-                                        <Divider />
-                                        <div className="articlebody">
-                                            {ReactHtmlParser(article.body)}
-                                        </div>
-                                    </Item.Description>
-                                    <br></br>
-                                    <Item.Extra>
-                                        Created at: {article.created_at.slice(0, 10)}
-                                    </Item.Extra>
-                                </Item.Content>
-                            </Item>
-                        </Item.Group>
-                    </Segment>
-
-                </div>
-            )
-        }
-
+    const articleRender = () => {
+      if (this.props.fetching) {
         return (
-            <div>
-                {articleRender()}
-                <br></br>
-            </div>
-        )
-    }
+          <Loader
+            className={this.props.fetching ? "active" : "inactive"}
+            size="large"
+          />
+        );
+      }
+      if (!article.title) {
+        return (
+          <div>
+            <h1>Article Not Found</h1>
+          </div>
+        );
+      }
+      console.log(this.props);
+      return (
+        <div>
+          <Segment className="articledetail">
+            {editdeleteOptions}
+            <Item.Group>
+              <Item>
+                <Item.Content>
+                  <Item.Header>
+                    <h1 className="article-title">{article.title}</h1>
+                  </Item.Header>
+                  <br />
+                  <Item.Meta>
+                    <Image
+                      className="ui avatar image"
+                      src={article.author.image.slice(13)}
+                    />
+                    <span>{article.author.username}</span>
+                  </Item.Meta>
+                  <br />
+                  <Item.Description>
+                    <Image
+                      className="topImage"
+                      src={
+                        article.image
+                          ? article.image.slice(13)
+                          : "https://www.impossible.sg/wp-content/uploads/2013/11/seo-article-writing.jpg"
+                      }
+                    />
+                    <Divider />
+                    <div className="articlebody">
+                      {ReactHtmlParser(article.body)}
+                    </div>
+                  </Item.Description>
+                  <br />
+                  <Item.Extra>
+                    Created at: {article.created_at.slice(0, 10)}
+                  </Item.Extra>
+                  <Item.Extra>
+                    <Rating
+                      maxRating={5}
+                      defaultRating={this.props.user_rating}
+                      icon="star"
+                      size="massive"
+                      onRate={this.handleRate}
+                    />
+                  </Item.Extra>
+                  <Item.Extra>
+                    Average Rating: {this.props.average_rating}
+                  </Item.Extra>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+          </Segment>
+        </div>
+      );
+    };
+
+    return (
+      <div>
+        {articleRender()}
+        <br />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-    return { isFetching: state.articlesReducer.isFetching, article: state.articlesReducer.article }
-}
+const mapStateToProps = state => {
+  return {
+    isFetching: state.articlesReducer.fetching,
+    article: state.articlesReducer.article,
+    user_rating: state.ratingsReducer.user_rating,
+    average_rating: state.ratingsReducer.average_rating
+  };
+};
 
-export default connect(mapStateToProps, { deleteArticle, getArticle })(Article)
+export default connect(
+  mapStateToProps,
+  { deleteArticle, getArticle, rateArticle, averageRating }
+)(Article);
