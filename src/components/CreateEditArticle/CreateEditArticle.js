@@ -100,6 +100,7 @@ export class CreateEditArticle extends Component {
             <Form onSubmit={this.formSubmit} error className="create-article-form">
                 <Container>
                     <Header textAlign="center"><u>{formHeader}</u></Header>
+                    <h5>Add a title</h5>
                     <Form.Input
                         fluid
                         name="title"
@@ -117,6 +118,7 @@ export class CreateEditArticle extends Component {
                         className="errors"
                         content={this.state.errors.titleError}
                     />
+                    <h5>Add a description</h5>
                     <Form.TextArea
                         name="description"
                         placeholder="Description"
@@ -136,6 +138,7 @@ export class CreateEditArticle extends Component {
                         onChange={this.fileHandler}
                     />
                     <Divider />
+                    <h5>Add a body</h5>
                     <CKEditor
                         content={this.state.body}
                         events={{ change: this.handleEditor }}

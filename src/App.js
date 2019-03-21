@@ -25,6 +25,7 @@ class App extends Component {
           <NavBar />
           <Divider />
           <div className="app">
+            <br />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
@@ -32,14 +33,15 @@ class App extends Component {
               <Route exact path="/verify/:token" component={VerifyMail} />
               <Route exact path="/reset-password" component={PasswordReset} />
               <Route exact path="/update-password/:token" component={PasswordUpdate} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/edit_profile" component={EditProfile} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/edit_profile" component={EditProfile} />
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/:slug" component={Article} />
               <Route exact path="/create_article" component={AddArticle} />
               <Route path="/articles/:slug/edit_article/" component={EditArticle} />
             </Switch>
           </div>
+          <br />
           <ReduxToastr
             timeOut={4000}
             newestOnTop={false}

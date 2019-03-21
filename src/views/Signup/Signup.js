@@ -7,6 +7,7 @@ const Signup = props => {
   return (
     <div className="auth-form">
       <Auth authaction='signup' history={props.history} />
+      <br /><br/>
     </div>
   );
 }

@@ -15,7 +15,7 @@ class NavBar extends Component {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       return (
-        <Menu secondary className="navbar">
+        <Menu secondary className="fixed navbar">
           <Menu.Item
             name="Authors Haven"
             className="head-title"
@@ -56,7 +56,7 @@ class NavBar extends Component {
       );
     } else {
       return (
-        <Menu secondary className="navbar">
+        <Menu secondary className=" fixed navbar">
           <Menu.Item
             name="Authors Haven"
             className="head-title"
@@ -92,7 +92,7 @@ class NavBar extends Component {
 const mapStateToProps = state => {
   return {
     loginSuccess: state.loginReducer.loginSuccess
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps)(NavBar);

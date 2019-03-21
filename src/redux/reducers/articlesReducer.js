@@ -88,8 +88,7 @@ export const articleReducer = (state = initState, action) => {
     case UPDATE_ARTICLE_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        articles: state.articles.filter(article => article.id !== action.article_id)
+        isFetching: false
       }
     case UPDATE_ARTICLE_FAILURE:
       return {
