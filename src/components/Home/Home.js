@@ -3,39 +3,29 @@ import './Home.scss';
 import { connect } from 'react-redux'
 import { getArticles } from "../../redux/actioncreators/listArticlesActions"
 import Loader from '../Loader/Loader';
-import { Item } from 'semantic-ui-react';
-import { articleContainer } from '../Articles/ArticlesContainer';
+import ArticleContainer from '../Articles/ArticlesContainer';
 
 export class Home extends Component {
-    componentDidMount = () => {
-        this.props.getArticles()
+  componentDidMount = () => {
+    this.props.getArticles();
+  };
+
+  render() {
+    const { isFetching, articles } = this.props
+    if (isFetching) {
+      return <Loader />
     }
 
-    render() {
-      const torender = () => this.props.articles.map(article => {
-        return articleContainer(article)
-      });
-      const form = torender()
-
-      const rendered = () => {
-        if (this.props.fetching){
-          return <Loader />
-        }
-        else{
-          return <Item.Group>{form}</Item.Group>
-        }
-      }
-
-      return (
-          <div>
-              {rendered()}
-          </div>
-      )
-    }
+    return (
+      <div>
+        <ArticleContainer articles={articles} />
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {fetching: state.listArticlesReducer.fetching, articles: state.listArticlesReducer.articles}
+  return { isFetching: state.articlesReducer.isFetching, articles: state.articlesReducer.articles }
 }
 
-export default connect(mapStateToProps, {getArticles})(Home)
+export default connect(mapStateToProps, { getArticles })(Home)

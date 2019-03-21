@@ -97,7 +97,7 @@ export class Article extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { fetching: state.getArticleReducer.fetching, article: state.getArticleReducer.article }
+    return { isFetching: state.articlesReducer.fetching, article: state.articlesReducer.article }
 }
 
 export default connect(mapStateToProps, { deleteArticle, getArticle })(Article)

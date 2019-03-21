@@ -6,9 +6,6 @@ import verifyReducer from "../reducers/VerifyMail";
 import { resetReducer } from "./resetReducer";
 import { pwdUpdateReducer } from "./pwdUpdateReducer";
 import profileReducer from "./profileReducer";
-import { listArticlesReducer } from "../reducers/listArticlesReducer";
-import { getArticleReducer } from "../reducers/getArticleReducer";
-import createArticleReducer from './createArticle'
 import articlesReducer from './articlesReducer'
 
 const rootReducer = combineReducers({
@@ -18,9 +15,6 @@ const rootReducer = combineReducers({
   resetReducer,
   pwdUpdateReducer,
   profileReducer,
-  listArticlesReducer,
-  getArticleReducer,
-  createArticleReducer,
   articlesReducer,
   toastr: toastrReducer,
 });

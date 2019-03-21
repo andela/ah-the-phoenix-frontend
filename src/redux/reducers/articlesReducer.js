@@ -1,15 +1,66 @@
 import {
   DELETE_FAILURE, DELETE_REQUEST, DELETE_SUCCESS,
-  UPDATE_ARTICLE_FAILURE, UPDATE_ARTICLE_REQUEST, UPDATE_ARTICLE_SUCCESS
+  UPDATE_ARTICLE_FAILURE, UPDATE_ARTICLE_REQUEST, UPDATE_ARTICLE_SUCCESS,
+  CREATE_ARTICLE_SUCCESS, CREATE_ARTICLE_REQUEST, CREATE_ARTICLE_FAILURE,
+  GET_ARTICLE_FAILURE, GET_ARTICLE_SUCCESS, GET_ARTICLE_REQUEST,
+  GET_ARTICLES_FAILURE, GET_ARTICLES_SUCCESS, GET_ARTICLES_REQUEST
 } from "../actiontypes";
 
 const initState = {
   isFetching: false,
-  articles: []
+  articles: [],
+  article: {}
 };
 
 export const articleReducer = (state = initState, action) => {
   switch (action.type) {
+    case CREATE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case CREATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false
+      }
+    case CREATE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isFetching: false
+      }
+    case GET_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isFetching: action.fetching,
+      }
+    case GET_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isFetching: action.fetching,
+      }
+    case GET_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.fetching,
+        article: action.article
+      }
+    case GET_ARTICLES_FAILURE:
+      return {
+        ...state,
+        isFetching: action.fetching,
+      }
+    case GET_ARTICLES_REQUEST:
+      return {
+        ...state,
+        isFetching: action.fetching,
+      }
+    case GET_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.fetching,
+        articles: action.articles
+      }
     case DELETE_REQUEST:
       return {
         ...state,

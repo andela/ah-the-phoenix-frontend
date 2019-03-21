@@ -27,7 +27,6 @@ export class CreateEditArticle extends Component {
                 body: article.body
             })
         }
-        console.log(this.state.body)
     }
 
     handlechange = e => {
@@ -170,9 +169,9 @@ export class CreateEditArticle extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.createArticleReducer.isFetching,
-        payload: state.createArticleReducer.payload,
-        article: state.getArticleReducer.article
+        isFetching: state.articlesReducer.isFetching,
+        payload: state.articlesReducer.payload,
+        article: state.articlesReducer.article
     }
 }
 

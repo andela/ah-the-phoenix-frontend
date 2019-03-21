@@ -1,11 +1,12 @@
 import * as types from "../../actiontypes";
-import { articleReducer } from "../articlesReducer";
+import articleReducer from "../articlesReducer";
 
 describe("Delete article reducer", () => {
   it("should return reducer initial state", () => {
     expect(articleReducer(undefined, {})).toEqual({
       isFetching: false,
-      articles: []
+      articles: [],
+      article: {}
     });
   });
   it("should return reducer state after article delete request", () => {

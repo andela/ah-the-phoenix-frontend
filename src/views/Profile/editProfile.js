@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProfile } from '../redux/actioncreators/userProfile';
-import EditProfileForm from '../components/Profile/EditProfileForm';
-import Loader from '../components/Loader/Loader';
+import { getProfile } from '../../redux/actioncreators/userProfile';
+import EditProfileForm from '../../components/Profile/EditProfileForm';
+import Loader from '../../components/Loader/Loader';
 
 export class EditProfile extends Component {
   componentDidMount() {

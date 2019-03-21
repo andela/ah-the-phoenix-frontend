@@ -1,14 +1,16 @@
 import * as types from "../../actiontypes"
-import { createArticleReducer } from "../createArticle"
+import articlesReducer from "../articlesReducer"
 
 describe("Create article reducer", () => {
     it("should return reducer initial state", () => {
-        expect(createArticleReducer(undefined, {})).toEqual({
-            isFetching: false
+        expect(articlesReducer(undefined, {})).toEqual({
+            isFetching: false,
+            "article": {},
+            "articles": []
         })
     })
     it("should return reducer state after article create request", () => {
-        expect(createArticleReducer({}, {
+        expect(articlesReducer({}, {
             type: types.CREATE_ARTICLE_REQUEST,
             isFetching: true
         })).toEqual({
@@ -16,7 +18,7 @@ describe("Create article reducer", () => {
         })
     })
     it("should return reducer state after create article success", () => {
-        expect(createArticleReducer({}, {
+        expect(articlesReducer({}, {
             type: types.CREATE_ARTICLE_SUCCESS,
             isFetching: false
         })).toEqual({
@@ -24,7 +26,7 @@ describe("Create article reducer", () => {
         })
     })
     it("should return reducer state after create article failure", () => {
-        expect(createArticleReducer({}, {
+        expect(articlesReducer({}, {
             type: types.CREATE_ARTICLE_FAILURE,
             isFetching: false
         })).toEqual({
