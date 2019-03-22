@@ -6,7 +6,9 @@ describe("Update article reducer", () => {
         expect(articleReducer(undefined, {})).toEqual({
             isFetching: false,
             articles: [],
-            article: {}
+            article: {},
+            liked: null,
+            disliked: null
         });
     });
     it("should return reducer state after article update request", () => {

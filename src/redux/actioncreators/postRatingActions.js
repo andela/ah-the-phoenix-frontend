@@ -3,7 +3,6 @@ import {
   POST_RATING_REQUEST,
   POST_RATING_FAILURE
 } from "../actiontypes";
-import { toastr } from "react-redux-toastr";
 import { axiosWithToken } from "../../utils/axios_config";
 
 export const ratingRequest = () => ({
@@ -27,10 +26,8 @@ export const rateArticle = rating => dispatch => {
     .post("api/v1/rate/" + slug + "/", { user_rating: rating })
     .then(res => {
       dispatch(ratingSuccess(res.data.data));
-      toastr.success("Success Rating", "Article rated successfully");
     })
     .catch(err => {
       dispatch(ratingFailure());
-      toastr.error("Rating Failed", "Article Rating Failed");
     });
 };

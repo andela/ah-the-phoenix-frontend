@@ -1,28 +1,28 @@
 import {
-  SOCIAL_AUTH_FAILURE,
-  SOCIAL_AUTH_REQUEST,
-  SOCIAL_AUTH_SUCCESS,
-  LOGIN_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS
+    SOCIAL_AUTH_FAILURE,
+    SOCIAL_AUTH_REQUEST,
+    SOCIAL_AUTH_SUCCESS,
+    LOGIN_FAILURE,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS
 } from "../actiontypes";
 import { axiosDefault } from "../../utils/axios_config";
 import { toastr } from "react-redux-toastr";
 
 export const socialRequest = () => ({
-  type: SOCIAL_AUTH_REQUEST
+    type: SOCIAL_AUTH_REQUEST
 });
 
 export const socialSuccess = () => ({
-  type: SOCIAL_AUTH_SUCCESS
+    type: SOCIAL_AUTH_SUCCESS
 });
 
 export const socialFailure = () => ({
-  type: SOCIAL_AUTH_FAILURE
+    type: SOCIAL_AUTH_FAILURE
 });
 export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
-  isFetching: true
+    type: LOGIN_REQUEST,
+    isFetching: true
 });
 
 export const loginSuccess = (user) => ({
@@ -32,8 +32,8 @@ export const loginSuccess = (user) => ({
 })
 
 export const loginFailure = () => ({
-  type: LOGIN_FAILURE,
-  isFetching: false
+    type: LOGIN_FAILURE,
+    isFetching: false
 });
 
 export const sociaLogin = (social_info) => dispatch => {

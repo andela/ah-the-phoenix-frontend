@@ -3,7 +3,6 @@ import {
   GET_RATING_REQUEST,
   GET_RATING_SUCCESS
 } from "../actiontypes";
-import { toastr } from "react-redux-toastr";
 import { axiosWithToken, axiosDefault } from "../../utils/axios_config";
 
 export const ratingRequest = () => ({
@@ -23,14 +22,12 @@ export const averageRating = () => dispatch => {
   const urlArray = window.location.href.split("/");
   const slug = urlArray[urlArray.length - 1];
   dispatch(ratingRequest());
-  axiosWithToken
+  axiosDefault
     .get("api/v1/rate/" + slug)
     .then(res => {
       dispatch(ratingSuccess(res.data.data));
-      toastr.success("Success Rating", "rating retrieved");
     })
     .catch(err => {
       dispatch(ratingFailure());
-      toastr.error("Rating Failed", " Rating retrieval Failed");
     });
 };

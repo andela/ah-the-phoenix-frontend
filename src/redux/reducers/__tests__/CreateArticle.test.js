@@ -6,7 +6,9 @@ describe("Create article reducer", () => {
         expect(articlesReducer(undefined, {})).toEqual({
             isFetching: false,
             "article": {},
-            "articles": []
+            "articles": [],
+            "disliked": null,
+            "liked": null
         })
     })
     it("should return reducer state after article create request", () => {

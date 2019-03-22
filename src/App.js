@@ -38,7 +38,7 @@ class App extends Component {
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/:slug" component={Article} />
               <Route exact path="/create_article" component={AddArticle} />
-              <Route path="/articles/:slug/edit_article/" component={EditArticle} />
+              <Route exact path="/articles/:slug/edit_article/" component={EditArticle} />
             </Switch>
           </div>
           <br />
