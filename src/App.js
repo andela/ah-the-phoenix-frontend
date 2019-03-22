@@ -25,6 +25,7 @@ class App extends Component {
           <NavBar />
           <Divider />
           <div className="app">
+            <br />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
@@ -40,6 +41,7 @@ class App extends Component {
               <Route exact path="/articles/:slug/edit_article/" component={EditArticle} />
             </Switch>
           </div>
+          <br />
           <ReduxToastr
             timeOut={4000}
             newestOnTop={false}

@@ -22,6 +22,7 @@ export class Login extends Component {
     return (
       <div className="auth-form">
         <AuthForm authaction='login' />
+        <br /><br />
       </div>
     )
   }

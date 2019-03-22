@@ -37,6 +37,7 @@ export class ArticlesContainer extends Component {
             <div>
                 <Item.Group divided>
                     {articleList}
+                    <br />
                 </Item.Group>
             </div>
         )

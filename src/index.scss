@@ -14,12 +14,17 @@ code {
 }
 #root{
   font-family: 'Encode Sans Condensed', sans-serif;
-  
+  background: linear-gradient(rgba(50, 50, 50, 0.6), rgba(50, 50, 50, 0.6)), url(images/background.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .app {
-  width: 100%;
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
   padding-top: 20px;
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: white;
 }

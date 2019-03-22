@@ -3,17 +3,13 @@ import { axiosWithToken } from '../../utils/axios_config'
 import { toastr } from 'react-redux-toastr'
 
 export const updateArticleRequest = () => ({
-    type: UPDATE_ARTICLE_REQUEST,
-    isFetching: true
+    type: UPDATE_ARTICLE_REQUEST
 })
-export const updateArticleSuccess = (article) => ({
-    type: UPDATE_ARTICLE_SUCCESS,
-    isFetching: false,
-    article
+export const updateArticleSuccess = () => ({
+    type: UPDATE_ARTICLE_SUCCESS
 })
 export const updateArticleFailure = () => ({
-    type: UPDATE_ARTICLE_FAILURE,
-    isFetching: false
+    type: UPDATE_ARTICLE_FAILURE
 })
 
 export const updateArticle = (article_slug, payload) => dispatch => {

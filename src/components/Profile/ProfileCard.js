@@ -13,10 +13,10 @@ export class ProfileCard extends Component {
         const profileCard = () => (Object.keys(profile).length !== 0 ? (
             <Card className="profile-card">
                 <Grid className="profile-grid">
-                    <Grid.Column width={5}>
+                    <Grid.Column width={6}>
                         <Image src={profile.image.slice(13)} size="small" style={{ height: "150px", width: "150px" }} circular />
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column width={7}>
                         <Header>My Profile</Header>
                         <Card.Content>
                             <b>Name: </b><Card.Header>
@@ -40,7 +40,7 @@ export class ProfileCard extends Component {
                             </Label>
                         </Card.Content>
                     </Grid.Column>
-                    <Grid.Column>
+                    <Grid.Column width={2}>
                         <Card.Content>
                             <Button as={Link} color="blue" to="/edit_profile"><Icon name="edit" className="edit-profile" /></Button>
                         </Card.Content>
