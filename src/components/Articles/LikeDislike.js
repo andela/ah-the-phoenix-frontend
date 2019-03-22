@@ -20,12 +20,12 @@ export class LikeDislike extends Component {
         let like_stat = null;
         let dislike_stat = null;
 
-
         if (likeSuccess || dislikeSuccess) {
             like_stat = like_status
             dislike_stat = dislike_status
             like_count = likes_count
-            dislike_count = dislikes_count
+            dislike_count = dislikes_count;
+
         } else {
             like_stat = liked
             dislike_stat = disliked
@@ -34,7 +34,7 @@ export class LikeDislike extends Component {
         }
         return (
             <div>
-                <Button as='div' labelPosition='right'>
+                <Button as='div' labelPosition='right' disabled={this.props.disabled === "true" ? true : null}>
                     <Button onClick={this.handleLike} color={!like_stat ? null : "teal"} >
                         <Icon name='thumbs up' />
                     </Button>
@@ -43,7 +43,7 @@ export class LikeDislike extends Component {
                     </Label>
                 </Button>
 
-                <Button as='div' labelPosition='right'>
+                <Button as='div' labelPosition='right' disabled={this.props.disabled === "true" ? true : null}>
                     <Button onClick={this.handleDislike} color={!dislike_stat ? null : "red"}>
                         <Icon name='thumbs down' />
                     </Button>
@@ -51,8 +51,8 @@ export class LikeDislike extends Component {
                         {dislike_count}
                     </Label>
                 </Button>
-
             </div>
+
         )
     }
 }

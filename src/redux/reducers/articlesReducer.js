@@ -9,7 +9,9 @@ import {
 const initState = {
   isFetching: false,
   articles: [],
-  article: {}
+  article: {},
+  liked: null,
+  disliked: null,
 };
 
 export const articleReducer = (state = initState, action) => {
@@ -37,20 +39,30 @@ export const articleReducer = (state = initState, action) => {
     case GET_ARTICLE_REQUEST:
       return {
         ...state,
+        article: {},
+        liked: null,
+        disliked: null,
         isFetching: action.fetching,
       }
     case GET_ARTICLE_SUCCESS:
       const user = JSON.parse(localStorage.getItem("user"))
-      let likedbyuser = action.article.liked_by.filter(user_liked => user_liked === user.user_id)
-      let dislikedbyuser = action.article.disliked_by.filter(user_disliked => user_disliked === user.user_id)
-
+      if (user) {
+        let likedbyuser = action.article.liked_by.filter(user_liked => user_liked === user.user_id)
+        let dislikedbyuser = action.article.disliked_by.filter(user_disliked => user_disliked === user.user_id)
+        return {
+          ...state,
+          isFetching: action.fetching,
+          article: action.article,
+          liked: likedbyuser.length > 0,
+          disliked: dislikedbyuser.length > 0
+        }
+      }
       return {
         ...state,
         isFetching: action.fetching,
-        article: action.article,
-        liked: likedbyuser.length > 0,
-        disliked: dislikedbyuser.length > 0
+        article: action.article
       }
+
     case GET_ARTICLES_FAILURE:
       return {
         ...state,
