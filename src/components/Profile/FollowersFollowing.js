@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { List, Image } from 'semantic-ui-react'
 
 export class FollowersFollowing extends Component {

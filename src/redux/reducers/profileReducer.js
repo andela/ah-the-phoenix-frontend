@@ -4,7 +4,6 @@ import {
   FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS,
   UNFOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS
 } from '../actiontypes';
-import { CommentActions } from 'semantic-ui-react';
 
 const initialState = {
   isFetching: false,

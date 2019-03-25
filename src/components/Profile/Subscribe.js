@@ -1,27 +1,38 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 import { subscribeNotifications } from "../../redux/actioncreators/subscribeActions";
 
 export class UserSettings extends Component {
-  componentDidMount = () => {
+  handleClick = e => {
     this.props.subscribeNotifications();
   };
-
-  handleClick = e => {
-    this.setState({
-      subscribed: true
-    });
-  };
   render() {
-    return (
-      <div>
-        You can either opt in or opt out of notifications <br />
-        <Button color="green"
-        onClick={this.handleClick}
-        >Subscribe</Button>
-      </div>
-    );
+    const getNotifications = this.props.profile.get_notifications;
+    let subscriptionSegment = null;
+    if (getNotifications === true) {
+      subscriptionSegment = (
+        <Fragment>
+          <Header as="h2">Your are already subscribed to notifications</Header>
+          <p>
+            To unsubscribe, click the unsubscribe link on the notification
+            emails
+          </p>
+        </Fragment>
+      );
+    } else if (getNotifications === false) {
+      subscriptionSegment = (
+        <Fragment>
+          <Header as="h2">
+            Subscribe to notifications by clicking this button
+          </Header>
+          <Button color="green" onClick={this.handleClick} size="medium">
+            Subscribe
+          </Button>
+        </Fragment>
+      );
+    }
+    return <div>{subscriptionSegment}</div>;
   }
 }
 

@@ -9,8 +9,8 @@ import {
 
 const initState = {
   isFetching: false,
-  user_rating: 0,
-  average_rating: 0
+  user_rating: null,
+  average_rating: null
 };
 
 export const ratingsReducer = (state = initState, action) => {

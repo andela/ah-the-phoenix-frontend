@@ -25,7 +25,10 @@ export const subscribeNotifications = () => dispatch => {
     .put("api/v1/users/subscribe/")
     .then(res => {
       dispatch(subscribeSuccess(res.data.Message));
-      toastr.success("Success!", res.data.Message);
+      toastr.success(
+        "Success!",
+        "You have successfully subscribed to notifications"
+      );
     })
     .catch(error => {
       dispatch(subscribeFailure());
