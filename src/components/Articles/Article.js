@@ -20,6 +20,7 @@ import "./Article.scss";
 import { likeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { dislikeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { LikeDislike } from './LikeDislike'
+import SocialShare from '../SocialShare/SocialShare'
 
 export class Article extends Component {
     state = {};
@@ -138,6 +139,7 @@ export class Article extends Component {
 
         return (
             <div>
+                <SocialShare article={article} />
                 {articleRender()}
                 <br />
             </div>
