@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Menu, Container } from "semantic-ui-react";
+import { Menu, Container, MenuItem } from "semantic-ui-react";
 import UserArticles from "./UserArticles";
 import FollowersFollowing from './FollowersFollowing'
+import UserSettings from "./Subscribe";
 
 export class ProfileMenu extends Component {
   state = { activeItem: "articles" };
@@ -17,6 +18,9 @@ export class ProfileMenu extends Component {
       displayItem = <FollowersFollowing profile={profile} follow_list="followers" />
     } else if (this.state.activeItem === "following") {
       displayItem = <FollowersFollowing profile={profile} follow_list="following" />
+    }
+    else if (this.state.activeItem === "settings") {
+      displayItem = <UserSettings />;
     }
     return (
       <Container>
@@ -39,6 +43,11 @@ export class ProfileMenu extends Component {
           <Menu.Item
             name="following"
             active={this.state.activeItem === "following"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="settings"
+            active={this.state.activeItem === "settings"}
             onClick={this.handleItemClick}
           />
         </Menu>
