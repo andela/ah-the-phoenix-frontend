@@ -82,6 +82,7 @@ export class Article extends Component {
                     return <LikeDislike disabled="true" props={this.props} />
                 }
             }
+            const userProfileUrl = "/profile/" + article.author.id
             return (
                 <div>
                     <Segment className="articledetail">
@@ -93,7 +94,7 @@ export class Article extends Component {
                                         <h1 className="article-title">{article.title}</h1>
                                     </Item.Header>
                                     <br></br>
-                                    <Item.Meta>
+                                    <Item.Meta as={Link} to={userProfileUrl}>
                                         <Image className="ui avatar image" src={article.author.image.slice(13)} />
                                         <span>{article.author.username}</span>
                                     </Item.Meta>

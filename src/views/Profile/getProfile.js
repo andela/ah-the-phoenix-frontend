@@ -9,11 +9,13 @@ import ProfileMenu from '../../components/Profile/ProfileMenu'
 
 export class Profile extends Component {
   componentDidMount() {
+    const user_id = this.props.match.params.user_id
     const { getProfile } = this.props;
-    getProfile();
+    getProfile(user_id);
   }
 
   render() {
+    const user_id = this.props.match.params.user_id
     const { isFetching, profile } = this.props;
     if (isFetching === true) {
       return (
@@ -25,9 +27,9 @@ export class Profile extends Component {
     return (
       <div>
         <Container>
-          <ProfileCard />
+          <ProfileCard profile={profile} user_id={user_id} />
           <Divider />
-          <ProfileMenu author_id={profile.username} />
+          <ProfileMenu author_id={profile.username} profile={profile} />
         </Container>
       </div>
     );

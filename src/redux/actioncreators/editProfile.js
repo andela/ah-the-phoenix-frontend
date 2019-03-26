@@ -26,7 +26,7 @@ export const editProfile = edit_data => dispatch => {
     .then(res => {
       dispatch(editProfileSuccess(res.data.user));
       toastr.success("Success", "Profile updated successfully");
-      window.location.replace("/profile");
+      window.history.back() ;
     })
     .catch(err => {
       dispatch(editProfileFailure());

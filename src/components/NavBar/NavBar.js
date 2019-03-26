@@ -13,7 +13,9 @@ class NavBar extends Component {
   render() {
     const { activeItem } = this.state;
     const user = JSON.parse(localStorage.getItem("user"));
+    let profileLink = null
     if (user) {
+      profileLink = "/profile/" + user.user_id
       return (
         <Menu secondary className="fixed navbar">
           <Menu.Item
@@ -37,7 +39,7 @@ class NavBar extends Component {
               name="Profile"
               icon="user"
               active={activeItem === 'Profile'}
-              as={Link} to='/profile'
+              as={Link} to={profileLink}
               onClick={this.handleItemClick}
             >
             </Menu.Item>
