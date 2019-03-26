@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Label, Popup, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
 import { connect } from "react-redux";
 import firebase from "firebase";
+import { getNotifications } from '../../redux/actioncreators/getNotifications'
+import Notifications from '../Notifications/Notifications'
 
 class NavBar extends Component {
   state = { activeItem: "home" };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
+  componentDidMount() {
+    this.props.getNotifications();
+  }
   render() {
+
     const { activeItem } = this.state;
     const user = JSON.parse(localStorage.getItem("user"));
     let profileLink = null
@@ -35,6 +40,32 @@ class NavBar extends Component {
               onClick={this.handleItemClick}
             ></Menu.Item>
 
+
+            <Popup
+              trigger={
+                <Menu.Item
+                  name="Notification"
+                  active={activeItem === 'Notifications'}
+                  onClick={this.handleItemClick}
+                >
+                  <Icon className="bell"></Icon>Notifications
+                  <Label color='red' floating>
+                    {this.props.notificationCount}
+                  </Label>
+                </Menu.Item>
+              }
+
+              content={
+                <Notifications />
+              }
+              position="bottom center"
+              on="click"
+              hideOnScroll
+              size="small"
+              wide>
+
+            </Popup>
+
             <Menu.Item
               name="Profile"
               icon="user"
@@ -54,7 +85,7 @@ class NavBar extends Component {
               }}
             />
           </Menu.Menu>
-        </Menu>
+        </Menu >
       );
     } else {
       return (
@@ -93,8 +124,9 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    loginSuccess: state.loginReducer.loginSuccess
+    loginSuccess: state.loginReducer.loginSuccess,
+    notificationCount: state.getNotificationsReducer.count
   }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { getNotifications })(NavBar);

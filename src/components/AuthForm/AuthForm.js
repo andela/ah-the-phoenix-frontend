@@ -280,7 +280,7 @@ class AuthForm extends Component {
     }
 
     return (
-      <Segment placeholder className="auth-form-segment" color="teal">
+      <Segment placeholder className="auth-form-segment">
         <Grid columns={2} relaxed="very" stackable>
           <Grid.Column verticalAlign="middle">
             <SocialAuth history={this.props.history} />

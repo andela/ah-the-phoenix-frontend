@@ -1,0 +1,28 @@
+.notification-title{
+    text-shadow: 1px 1px 10px #000;
+    margin-bottom: 1%;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+}
+.notification-error{
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+    margin-bottom: 1%;
+    color: rgb(175, 13, 13);
+    text-align: center;
+}
+.read-notification{
+    background-color: rgb(221, 223, 222) !important;
+}
+.notifications {
+    width: 500px;
+}
+.notifications-load{
+    color: rgb(21, 73, 151);
+    text-align: center;
+    margin: 5%;
+}
+.notifications-list {
+    margin: auto !important;
+    padding: auto !important;
+}

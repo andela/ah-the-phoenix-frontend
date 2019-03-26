@@ -17,6 +17,8 @@ import Article from "./components/Articles/Article";
 import AddArticle from "./views/AddArticle/AddArticle";
 import EditArticle from "./views/EditArticle/EditArticle";
 import SubscribeLink from "./components/Home/Subscribe";
+import Notifications from './components/Notifications/Notifications'
+import SingleNotification from './components/Notifications/SingleNotification'
 
 class App extends Component {
   render() {
@@ -49,6 +51,8 @@ class App extends Component {
                 path="/api/v1/users/unsubscribe/:uuid"
                 component={SubscribeLink}
               />
+              <Route exact path="/notifications" component={Notifications} />
+              <Route exact path="/notifications/:id" component={SingleNotification} />
             </Switch>
           </div>
           <br />

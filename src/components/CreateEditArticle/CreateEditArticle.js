@@ -99,7 +99,7 @@ export class CreateEditArticle extends Component {
 
             <Form onSubmit={this.formSubmit} error className="create-article-form">
                 <Container>
-                    <Header textAlign="center"><u>{formHeader}</u></Header>
+                    <Header textAlign="center">{formHeader}</Header>
                     <h5>Add a title</h5>
                     <Form.Input
                         fluid
@@ -111,7 +111,6 @@ export class CreateEditArticle extends Component {
                         onChange={this.handlechange}
                         value={this.state.title}
                     />
-
                     <Divider />
                     <Message
                         error
