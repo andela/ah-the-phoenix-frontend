@@ -9,7 +9,7 @@ export const getArticles = () => (dispatch) => {
   dispatch(getArticlesRequest());
   axiosDefault.get('api/v1/articles/')
     .then((res) => {
-      dispatch(getArticlesSuccess(res.data.article.Articles));
+      dispatch(getArticlesSuccess(res.data.article.Articles.reverse()));
     })
     .catch((error) => {
       dispatch(getArticlesFailure());
