@@ -33,8 +33,8 @@ class App extends Component {
               <Route exact path="/verify/:token" component={VerifyMail} />
               <Route exact path="/reset-password" component={PasswordReset} />
               <Route exact path="/update-password/:token" component={PasswordUpdate} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/edit_profile" component={EditProfile} />
+              <Route exact path="/profile/:user_id" component={Profile} />
+              <Route path="/:user_id/edit_profile" component={EditProfile} />
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/:slug" component={Article} />
               <Route exact path="/create_article" component={AddArticle} />

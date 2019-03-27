@@ -10,21 +10,33 @@ export const profileRequest = () => ({
   type: PROFILE_REQUEST
 });
 
-export const profileSuccess = payload => ({
+export const profileSuccess = (payload, followed, followers_total, following_total) => ({
   type: PROFILE_SUCCESS,
-  payload
+  payload,
+  followed,
+  followers_total,
+  following_total
 });
 
 export const profileFailure = () => ({
   type: PROFILE_FAILURE
 });
 
-export const getProfile = () => dispatch => {
+export const getProfile = (user_id) => dispatch => {
   dispatch(profileRequest());
   axiosWithToken
-    .get("api/v1/user/")
+    .get("api/v1/profiles/" + user_id)
     .then(res => {
-      dispatch(profileSuccess(res.data.user));
+      const user = JSON.parse(localStorage.getItem("user"));
+      let followed = res.data.user.followers.filter(u => u.user_id === user.user_id)
+      if (followed.length > 0) {
+        followed = true
+      } else {
+        followed = false
+      }
+      const followers_total = res.data.user.followers_total
+      const following_total = res.data.user.following_total
+      dispatch(profileSuccess(res.data.user, followed, followers_total, following_total));
       toastr.success("Success", "Profile retrieved successfully");
     })
     .catch(err => {

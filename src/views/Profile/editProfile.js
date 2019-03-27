@@ -6,8 +6,9 @@ import Loader from '../../components/Loader/Loader';
 
 export class EditProfile extends Component {
   componentDidMount() {
+    const user_id = this.props.match.params.user_id
     const { getProfile } = this.props
-    getProfile()
+    getProfile(user_id)
   }
   render() {
     const { isFetching } = this.props;

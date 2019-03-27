@@ -29,10 +29,16 @@ export class EditProfileForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    let imageUrl = null
+    if (this.state.uploadedImage === null) {
+      imageUrl = this.state.image
+    } else {
+      imageUrl = this.state.uploadedImage
+    }
     const user = {
       username: this.state.username,
       bio: this.state.bio,
-      image: this.state.uploadedImage || this.state.image
+      image: imageUrl
     };
     this.props.editProfile({ user: user } || { user: this.state });
   };
@@ -59,7 +65,7 @@ export class EditProfileForm extends Component {
               <div>
                 {/* eslint-disable-next-line */}
                 <Image
-                  src={this.state.image.slice(13)}
+                  src={this.state.image}
                   style={{ height: "100px", width: "100px" }}
                   alt={this.state.username}
                   onClick={() => this.fileInput.click()}
@@ -96,6 +102,7 @@ export class EditProfileForm extends Component {
           </Card.Content>
           <Card.Content extra />
         </Card>
+        <br />
       </Fragment>
     );
   }

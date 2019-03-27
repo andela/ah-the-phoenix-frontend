@@ -7,6 +7,7 @@ export class ArticlesContainer extends Component {
         const { articles } = this.props
         const articleList = articles.length !== 0 ? (articles.map(article => {
             const articleUrl = "/articles/" + article.slug
+            const userProfileUrl = "/profile/" + article.author.id
             return <Item key={article.slug}>
                 <Item.Image
                     src={article.image ?
@@ -17,7 +18,7 @@ export class ArticlesContainer extends Component {
                     <Item.Header as={Link} to={articleUrl}>
                         <h2>{article.title}</h2>
                     </Item.Header>
-                    <Item.Extra>
+                    <Item.Extra as={Link} to={userProfileUrl}>
                         <Image className="ui avatar image" src={article.author.image.slice(13)} />
                         <span>{article.author.username}</span>
                     </Item.Extra>
