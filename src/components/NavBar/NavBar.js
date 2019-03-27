@@ -22,10 +22,10 @@ class NavBar extends Component {
     if (user) {
       profileLink = "/profile/" + user.user_id
       return (
-        <Menu secondary className="fixed navbar">
+        <Menu secondary className="fixed navbar" inverted>
           <Menu.Item
             name="Authors Haven"
-            className="head-title"
+            className="head-title animated lightSpeedIn"
             as={Link} to='/'
             active={activeItem === "home"}
             onClick={this.handleItemClick}
@@ -34,7 +34,7 @@ class NavBar extends Component {
           <Menu.Menu position="right" className="auth-menu">
             <Menu.Item
               name="Create Article"
-              icon="pencil"
+              icon="clipboard"
               active={activeItem === 'Create Article'}
               as={Link} to='/create_article'
               onClick={this.handleItemClick}
@@ -44,7 +44,7 @@ class NavBar extends Component {
             <Popup
               trigger={
                 <Menu.Item
-                  name="Notification"
+                  name="Notifications"
                   active={activeItem === 'Notifications'}
                   onClick={this.handleItemClick}
                 >
@@ -89,7 +89,7 @@ class NavBar extends Component {
       );
     } else {
       return (
-        <Menu secondary className=" fixed navbar">
+        <Menu secondary className="fixed navbar" inverted>
           <Menu.Item
             name="Authors Haven"
             className="head-title"

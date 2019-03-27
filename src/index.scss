@@ -14,19 +14,19 @@ code {
 }
 #root{
   font-family: 'Encode Sans Condensed', sans-serif;
-  background: linear-gradient(rgba(236, 236, 235, 0.9), rgba(224, 224, 224, 0.9)), rgb(179, 231, 183);
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
   background-attachment: fixed;
-  background-repeat: no-repeat;
 }
 
 .app {
-  width: 100%;
+  width: 90%;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   padding-top: 20px;
   padding-left: 5%;
   padding-right: 5%;
-  background-color: rgb(243, 243, 243);
+  background-color: inherit;
   border-radius: 6px;
-  min-height: 500px;
+  min-height: 600px;
 }

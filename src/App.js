@@ -1,24 +1,23 @@
-import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Signup from "./views/Signup/Signup";
-import Login from "./views/Login/Login";
-import NavBar from "./components/NavBar/NavBar";
-import { Divider } from "semantic-ui-react";
-import ReduxToastr from "react-redux-toastr";
-import VerifyMail from "./views/VerifyMail/VerifyMail";
-import PasswordReset from "./views/PasswordReset/PasswordReset";
-import PasswordUpdate from "./views/PasswordReset/PasswordUpdate";
-import Profile from "./views/Profile/getProfile";
-import EditProfile from "./views/Profile/editProfile";
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Home from "./components/Home/Home"
+import Signup from "./views/Signup/Signup"
+import Login from './views/Login/Login'
+import NavBar from './components/NavBar/NavBar'
+import ReduxToastr from 'react-redux-toastr'
+import VerifyMail from './views/VerifyMail/VerifyMail';
+import PasswordReset from './views/PasswordReset/PasswordReset';
+import PasswordUpdate from './views/PasswordReset/PasswordUpdate';
+import Profile from './views/Profile/getProfile';
+import EditProfile from './views/Profile/editProfile';
 import ListArticles from "./components/Articles/ListArticles";
-import "./index.scss";
-import Article from "./components/Articles/Article";
-import AddArticle from "./views/AddArticle/AddArticle";
-import EditArticle from "./views/EditArticle/EditArticle";
-import SubscribeLink from "./components/Home/Subscribe";
-import Notifications from './components/Notifications/Notifications'
+import "./index.scss"
+import Article from './components/Articles/Article';
+import AddArticle from './views/AddArticle/AddArticle';
+import EditArticle from './views/EditArticle/EditArticle';
+import AllNotifications from './components/Notifications/AllNotifications'
 import SingleNotification from './components/Notifications/SingleNotification'
+import Footer from './components/Footer/Footer'
 
 class App extends Component {
   render() {
@@ -26,7 +25,6 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NavBar />
-          <Divider />
           <div className="app">
             <br />
             <Switch>
@@ -51,11 +49,12 @@ class App extends Component {
                 path="/api/v1/users/unsubscribe/:uuid"
                 component={SubscribeLink}
               />
-              <Route exact path="/notifications" component={Notifications} />
+              <Route exact path="/notifications" component={AllNotifications} />
               <Route exact path="/notifications/:id" component={SingleNotification} />
             </Switch>
           </div>
           <br />
+          <Footer />
           <ReduxToastr
             timeOut={4000}
             newestOnTop={false}

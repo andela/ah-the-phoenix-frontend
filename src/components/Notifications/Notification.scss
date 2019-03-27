@@ -1,4 +1,4 @@
-.notification-title{
+.notifications-title{
     text-shadow: 1px 1px 10px #000;
     margin-bottom: 1%;
     color: #fff;
@@ -17,6 +17,9 @@
 .notifications {
     width: 500px;
 }
+.all-style{
+    width: 100%;
+}
 .notifications-load{
     color: rgb(21, 73, 151);
     text-align: center;
@@ -25,4 +28,15 @@
 .notifications-list {
     margin: auto !important;
     padding: auto !important;
+    
+}
+.notify-container{
+    height: 100% !important;
+}
+.all-notifications{
+    padding: 60px !important;
+    width: 100% !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px !important;
+    background: #fff !important;
 }

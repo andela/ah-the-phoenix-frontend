@@ -4,13 +4,14 @@ import {
     GET_SINGLE_NOTIFICATION_FAILURE, GET_SINGLE_NOTIFICATION_REQUEST
 } from '../actiontypes';
 import { axiosWithToken } from '../../utils/axios_config';
+import { toastr } from 'react-redux-toastr'
 
-const getSingleNotificationFailure = () => ({ type: GET_SINGLE_NOTIFICATION_FAILURE });
-const getSingleNotificationRequest = () => ({ type: GET_SINGLE_NOTIFICATION_REQUEST });
+export const getSingleNotificationFailure = () => ({ type: GET_SINGLE_NOTIFICATION_FAILURE });
+export const getSingleNotificationRequest = () => ({ type: GET_SINGLE_NOTIFICATION_REQUEST });
 
-const getNotificationsSuccess = notification => ({ type: GET_NOTIFICATIONS_SUCCESS, notification });
-const getNotificationsFailure = () => ({ type: GET_NOTIFICATIONS_FAILURE });
-const getNotificationsRequest = () => ({ type: GET_NOTIFICATIONS_REQUEST });
+export const getNotificationsSuccess = notification => ({ type: GET_NOTIFICATIONS_SUCCESS, notification });
+export const getNotificationsFailure = () => ({ type: GET_NOTIFICATIONS_FAILURE });
+export const getNotificationsRequest = () => ({ type: GET_NOTIFICATIONS_REQUEST });
 
 export const getNotifications = () => (dispatch) => {
 
@@ -28,7 +29,13 @@ export const getSingleNotification = (id) => (dispatch) => {
     dispatch(getSingleNotificationRequest());
     axiosWithToken.get('api/v1/notifications/' + id)
         .then((res) => {
-            window.location.replace(`/articles/${res.data.notifications.action_object.slug}`);
+            if (res.data.notifications.action_object) {
+                window.location.replace(`/articles/${res.data.notifications.action_object.slug}`);
+            }
+            else {
+                toastr.error("The article you are trying to view was moved");
+                setTimeout(() => { window.location.replace(`/notifications`); }, 3000);
+            }
 
         })
         .catch((error) => {

@@ -2,8 +2,9 @@ import {
     GET_NOTIFICATIONS_FAILURE, GET_NOTIFICATIONS_SUCCESS, GET_NOTIFICATIONS_REQUEST, GET_SINGLE_NOTIFICATION_REQUEST, GET_SINGLE_NOTIFICATION_FAILURE
 } from "../actiontypes";
 
-const initState = {
-    isFetching: false
+export const initState = {
+    isFetching: false,
+    count: 0
 };
 
 export const getNotificationsReducer = (state = initState, action) => {

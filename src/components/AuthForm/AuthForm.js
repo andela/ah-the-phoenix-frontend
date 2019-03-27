@@ -167,6 +167,7 @@ class AuthForm extends Component {
               Forgot Password?
             </a>
           </Form.Field>
+          <br></br>
         </Form>
       );
     };
@@ -175,10 +176,9 @@ class AuthForm extends Component {
       return (
         <Form onSubmit={this.handleSignup} error>
           <Header textAlign="center" as="h3">
-            <br />
             Signup here
+            <br />
           </Header>
-          <br />
           <Form.Input
             icon="user"
             iconPosition="left"
@@ -258,7 +258,7 @@ class AuthForm extends Component {
             fluid
             content="Signup"
             type="submit"
-            primary
+            positive
           />
           <br />
         </Form>
@@ -288,7 +288,7 @@ class AuthForm extends Component {
           <Grid.Column>{form}</Grid.Column>
         </Grid>
 
-        <Divider vertical>Or</Divider>
+        <Divider vertical></Divider>
       </Segment>
     );
   }

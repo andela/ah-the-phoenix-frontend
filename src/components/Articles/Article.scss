@@ -3,22 +3,27 @@
     height: 400px !important;
 }
 .topImage {
+    margin-top: 3% !important;
     width: 100% !important;
     max-height: 400px !important;
 }
 .articledetail{
-    width: 70% !important;
-    margin: auto !important;
     padding: 60px !important;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px !important;
-    background: rgb(243, 243, 243) !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: #fff !important;
 }
 .article-title{
     text-shadow: 1px 1px 10px #000;
-    margin-bottom: 1%;
+    margin-bottom: 20px !important;
     color: #fff;
-    font-size: 35px;
+    font-size: 30px;
+}
+.article-list-item{
+    border: solid 1px silver !important;
+    border-radius: 5px !important;
+    box-shadow: 1px 1px 5px silver !important;
+    background: rgb(245, 245, 245) !important;
+    padding: 3%  !important;
+    min-height: 180px !important; 
 }
