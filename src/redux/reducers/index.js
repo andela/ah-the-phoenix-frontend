@@ -6,6 +6,7 @@ import verifyReducer from "../reducers/VerifyMail";
 import { resetReducer } from "./resetReducer";
 import { pwdUpdateReducer } from "./pwdUpdateReducer";
 import profileReducer from "./profileReducer";
+import { bookmarkArticleReducer } from "./bookmarkArticleReducer";
 import articlesReducer from "./articlesReducer";
 import ratingsReducer from "./ratingsReducer";
 import likeDislikeReducer from '../reducers/LikeDislike'
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   pwdUpdateReducer,
   profileReducer,
   articlesReducer,
+  bookmarkArticleReducer,
   ratingsReducer,
   likeDislikeReducer,
   toastr: toastrReducer,

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Menu, Container } from "semantic-ui-react";
 import UserArticles from "./UserArticles";
-import FollowersFollowing from "./FollowersFollowing";
 import UserSettings from "./Subscribe";
+import FollowersFollowing from './FollowersFollowing'
+import ListBookmarkedArticles from './ListBookmarkedArticles';
 
 export class ProfileMenu extends Component {
   state = { activeItem: "articles" };
@@ -10,8 +11,19 @@ export class ProfileMenu extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    const { profile } = this.props;
-    const user = JSON.parse(localStorage.getItem("user"));
+    const { profile } = this.props
+    const user = JSON.parse(localStorage.getItem("user"))
+    let bookmarkTab = null
+    if (profile.id===user.user_id) {
+      bookmarkTab = (
+        <Menu.Item
+            name="bookmarks"
+            active={this.state.activeItem === "bookmarks"}
+            onClick={this.handleItemClick}
+          />
+      )
+
+    }
     let displayItem = null;
     if (this.state.activeItem === "articles") {
       displayItem = <UserArticles author_id={this.props.author_id} />;
@@ -29,6 +41,9 @@ export class ProfileMenu extends Component {
     ) {
       displayItem = <UserSettings profile={profile} />;
     }
+    if (this.state.activeItem === "bookmarks") {
+      displayItem = <ListBookmarkedArticles />;
+    }
     return (
       <Container>
         <Menu tabular>
@@ -37,11 +52,7 @@ export class ProfileMenu extends Component {
             active={this.state.activeItem === "articles"}
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name="bookmarks"
-            active={this.state.activeItem === "bookmarks"}
-            onClick={this.handleItemClick}
-          />
+          {bookmarkTab}
           <Menu.Item
             name="followers"
             active={this.state.activeItem === "followers"}
