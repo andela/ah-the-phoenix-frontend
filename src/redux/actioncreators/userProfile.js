@@ -1,4 +1,3 @@
-import { toastr } from "react-redux-toastr";
 import {
   PROFILE_REQUEST,
   PROFILE_SUCCESS,
@@ -37,10 +36,8 @@ export const getProfile = (user_id) => dispatch => {
       const followers_total = res.data.user.followers_total
       const following_total = res.data.user.following_total
       dispatch(profileSuccess(res.data.user, followed, followers_total, following_total));
-      toastr.success("Success", "Profile retrieved successfully");
     })
     .catch(err => {
       dispatch(profileFailure());
-      toastr.error("Profile retrieval failed", "Profile failed. Check details");
     });
 };

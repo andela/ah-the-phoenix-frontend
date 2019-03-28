@@ -8,7 +8,7 @@ export class ArticlesContainer extends Component {
         const articleList = articles.length !== 0 ? (articles.map(article => {
             const articleUrl = "/articles/" + article.slug
             const userProfileUrl = "/profile/" + article.author.id
-            return <Item key={article.slug}>
+            return <Item key={article.slug} className="animated fadeInUp">
                 <Item.Image
                     src={article.image ?
                         article.image.slice(13)
@@ -16,6 +16,7 @@ export class ArticlesContainer extends Component {
                     size="medium" />
                 <Item.Content>
                     <Item.Header as={Link} to={articleUrl}>
+
                         <h2>{article.title}</h2>
                     </Item.Header>
                     <Item.Extra as={Link} to={userProfileUrl}>
@@ -31,12 +32,13 @@ export class ArticlesContainer extends Component {
                     </Item.Extra>
                 </Item.Content>
             </Item>
+
         })) : (
                 <h3>Oops! No articles to display</h3>
             )
         return (
             <div>
-                <Item.Group divided>
+                <Item.Group divided className="article-list-item">
                     {articleList}
                     <br />
                 </Item.Group>

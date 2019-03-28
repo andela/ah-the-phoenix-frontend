@@ -2,25 +2,26 @@ import React, { Component } from 'react'
 import {
     FacebookIcon, FacebookShareButton,
     TwitterIcon, TwitterShareButton,
-    EmailIcon, EmailShareButton
+    EmailIcon, EmailShareButton,
+    WhatsappShareButton, WhatsappIcon
 } from 'react-share';
 import './SocialShare.scss'
 
 export class SocialShare extends Component {
     render() {
-        const facebookLink = window.location.href;
-        const twitterLink = window.location.href;
+        const shareLink = window.location.href;
         return (
-            <div class="social-btns">
-                <EmailShareButton className="share-button" subject="Here is a nice article from authors haven" body={window.location.href}>
-                    <EmailIcon
+            <div className="social-btns">
+                <WhatsappShareButton className="share-button" url={shareLink} title="Authors Haven"><WhatsappIcon size={50} /></WhatsappShareButton>
+                <EmailShareButton className="share-button" subject="Here is a nice article from authors haven" body={shareLink}>
+                    <EmailIcon size={50}
                     /></EmailShareButton>
 
-                <FacebookShareButton className="fb-xfbml-parse-ignore share-button" url={facebookLink} title="Authors Haven" quote="Here is a great article">
-                    <FacebookIcon />
+                <FacebookShareButton className="fb-xfbml-parse-ignore share-button" url={shareLink} title="Authors Haven" quote="Here is a great article">
+                    <FacebookIcon size={50} />
                 </FacebookShareButton>
 
-                <TwitterShareButton className="share-button" url={twitterLink} title="Authors Haven" via="authorsHaven21"><TwitterIcon /></TwitterShareButton>
+                <TwitterShareButton className="share-button" url={shareLink} title="Authors Haven" via="authorsHaven21"><TwitterIcon size={50} /></TwitterShareButton>
             </div>
         )
     }

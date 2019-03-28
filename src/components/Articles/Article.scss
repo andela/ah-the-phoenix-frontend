@@ -3,16 +3,34 @@
     height: 400px !important;
 }
 .topImage {
+    margin-top: 3% !important;
     width: 100% !important;
     max-height: 400px !important;
 }
 .articledetail{
-    width: 70% !important;
-    margin: auto !important;
     padding: 60px !important;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px !important;
+    background: #fff !important;
 }
 .article-title{
-    text-align: left;
+    text-shadow: 1px 1px 10px #000;
+    margin-bottom: 20px !important;
+    color: #fff;
+    font-size: 30px;
+}
+.article-list-item{
+    border: solid 1px silver !important;
+    border-radius: 5px !important;
+    box-shadow: 1px 1px 5px silver !important;
+    background: rgb(245, 245, 245) !important;
+    padding: 3%  !important;
+    min-height: 180px !important; 
+}
+.menu-btns{
+    border: none !important;
+    box-shadow: none !important;
+}
+.like-dislike{
+    margin-left: -34% !important;
 }

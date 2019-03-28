@@ -1,13 +1,13 @@
-import {BOOKMARK_ARTICLE_FAILURE, BOOKMARK_ARTICLE_REQUEST, BOOKMARK_ARTICLE_SUCCESS} from "../actiontypes";
-import {axiosWithToken} from "../../utils/axios_config";
+import { BOOKMARK_ARTICLE_FAILURE, BOOKMARK_ARTICLE_REQUEST, BOOKMARK_ARTICLE_SUCCESS } from "../actiontypes";
+import { axiosWithToken } from "../../utils/axios_config";
 import { toastr } from "react-redux-toastr";
 import { getBookmarkedSuccess } from "./listBookmarkedArticles";
 
-export const bookmarkArticleSuccess = () => ({type: BOOKMARK_ARTICLE_SUCCESS, fetching: false})
+export const bookmarkArticleSuccess = () => ({ type: BOOKMARK_ARTICLE_SUCCESS, fetching: false })
 
-export const bookmarkArticleFailure = () => ({type: BOOKMARK_ARTICLE_FAILURE, fetching: false})
+export const bookmarkArticleFailure = () => ({ type: BOOKMARK_ARTICLE_FAILURE, fetching: false })
 
-export const bookmarkArticleRequest = () => ({type: BOOKMARK_ARTICLE_REQUEST, fetching: true})
+export const bookmarkArticleRequest = () => ({ type: BOOKMARK_ARTICLE_REQUEST, fetching: true })
 
 export const bookmarkArticle = () => dispatch => {
     dispatch(bookmarkArticleRequest())
