@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Image, Segment, Button, Container, Divider, Item, Icon, Rating } from 'semantic-ui-react';
+import { Image, Segment, Button, Container, Divider, Item } from 'semantic-ui-react';
 import ReactHtmlParser from 'react-html-parser'
 import Loader from '../Loader/Loader';
 import './Article.scss';
@@ -12,10 +12,10 @@ import { unBookmarkArticle } from "../../redux/actioncreators/unBookmarkArticleA
 import { getBookmarked } from '../../redux/actioncreators/listBookmarkedArticles';
 import { rateArticle } from "../../redux/actioncreators/postRatingActions";
 import { averageRating } from "../../redux/actioncreators/getRatingActions";
-import { LikeDislike } from "./LikeDislike";
 import { likeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { dislikeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import SocialShare from '../SocialShare/SocialShare'
+import { ButtonContainer } from './ButtonContainer'
 
 export class Article extends Component {
     state = {};
@@ -29,109 +29,39 @@ export class Article extends Component {
         this.props.deleteArticle(article_slug);
     };
 
-    bookmarked = (slug) => {
-        const articleInFavs = this.props.favArticles.filter(article => article.slug === slug)
-        if (articleInFavs.length > 0){
-            return true
-        }
-        else {
-            return false
-        }
-    }
+    render() {
+        const { article } = this.props
+        const edit_link = "/articles/" + article.slug + "/edit_article/";
+        const user = JSON.parse(localStorage.getItem("user"))
+        let editdeleteOptions = null
+        if (Object.keys(article).length !== 0 && user) {
+            editdeleteOptions = user.username === article.author.username ? (
+                <Container textAlign='right'>
+                    <Button size="mini" as={Link} to={edit_link} content="Edit" icon="edit" color='blue' />
+                    <Button size="mini" content="Delete" color='red' icon="delete"
+                        onClick={e => { this.handleDelete(e, article.slug) }} />
 
-    handleBookmark = (slug) => {
-        if (this.bookmarked(slug)){
-            this.props.unBookmarkArticle()
+                </Container>
+            ) : (
+                    null
+                )
         }
-        else {
-            this.props.bookmarkArticle()
-        }
-    }
-    handleRate = (e, { rating }) => {
-      this.props.rateArticle(rating);
-    };
-
-    handleClick = (e, article_slug) => {
-      e.preventDefault();
-      this.props.rateArticle(article_slug);
-    };
-
-    iconClass = (slug) => {
-        if (this.props.fetching){
-            return "loading"
-        }
-        if (this.bookmarked(slug)){
-            return "enabled"
-        }
-        return "disabled"
-    }
-
-  render() {
-    const { article } = this.props;
-    const edit_link = "/articles/" + article.slug + "/edit_article/";
-    const user = JSON.parse(localStorage.getItem("user"));
-    let editdeleteOptions = null;
-    let rating = null;
-    if (Object.keys(article).length !== 0 && user) {
-      editdeleteOptions =
-        user.username === article.author.username ? (
-          <Container textAlign="right">
-            <Button
-              size="mini"
-              as={Link}
-              to={edit_link}
-              content="Edit"
-              icon="edit"
-              color="blue"
-            />
-            <Button
-              size="mini"
-              content="Delete"
-              color="red"
-              icon="delete"
-              onClick={e => {
-                this.handleDelete(e, article.slug);
-              }}
-            />
-          </Container>
-        ) : null;
-      rating = user ? (
-        <Rating
-          maxRating={5}
-          defaultRating={this.props.user_rating}
-          icon="star"
-          size="massive"
-          onRate={this.handleRate}
-        />
-      ) : null;
-    }
-    const articleRender = () => {
-      if (this.props.isFetching) {
-        return (
-          <Loader
-            className={this.props.isFetching ? "active" : "inactive"}
-            size="large"
-          />
-        );
-      }
-      if (!article.title) {
-        return (
-          <div>
-            <h1>Article Not Found</h1>
-          </div>
-        );
-      }
-
-            const likecomponent = () => {
-                if (user) {
-                    return (
-                        <LikeDislike props={this.props} />
-                    )
-                }
-                else {
-                    return <LikeDislike disabled="true" props={this.props} />
-                }
+        const articleRender = () => {
+            if (this.props.isFetching) {
+                return (<Loader
+                    className={this.props.isFetching
+                        ? "active"
+                        : "inactive"}
+                    size='large' />)
             }
+            if (!article.title) {
+                return (
+                    <div>
+                        <h1>Article Not Found</h1>
+                    </div>
+                )
+            }
+
             const userProfileUrl = "/profile/" + article.author.id
             return (
                 <div>
@@ -164,19 +94,9 @@ export class Article extends Component {
                                     <Item.Extra>
                                         Created at: {article.created_at.slice(0, 10)}
                                     </Item.Extra>
-                                    {user.username !== article.author.username ? (
-                                      <Item.Extra>{rating}</Item.Extra>
-                                    ) : null}
-                                    <Item.Extra>
-                                      Average Rating: {this.props.average_rating}
-                                    </Item.Extra>
-                                    <Item.Extra>
-                                        {likecomponent()}
-                                    </Item.Extra>
+                                    <ButtonContainer props={this.props} />
                                     <br></br>
-                                    <Icon link name="bookmark" className={this.iconClass(article.slug)}
-                                    onClick={() => this.handleBookmark(article.slug)}
-                                    size="large" />
+
                                 </Item.Content>
                             </Item>
                         </Item.Group>
@@ -196,24 +116,24 @@ export class Article extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    isFetching: state.articlesReducer.fetching,
-    article: state.articlesReducer.article,
-    user_rating: state.ratingsReducer.user_rating,
-    average_rating: state.ratingsReducer.average_rating,
-    favArticles: state.bookmarkArticleReducer.articles, fetching: state.bookmarkArticleReducer.fetching,
-    liked: state.articlesReducer.liked,
-    disliked: state.articlesReducer.disliked,
-    like_status: state.likeDislikeReducer.like_status,
-    dislike_status: state.likeDislikeReducer.dislike_status,
-    likes_count: state.likeDislikeReducer.likes_count,
-    dislikes_count: state.likeDislikeReducer.dislikes_count,
-    likeSuccess: state.likeDislikeReducer.likeSuccess,
-    dislikeSuccess: state.likeDislikeReducer.dislikeSuccess,
-  };
+    return {
+        isFetching: state.articlesReducer.fetching,
+        article: state.articlesReducer.article,
+        user_rating: state.ratingsReducer.user_rating,
+        average_rating: state.ratingsReducer.average_rating,
+        favArticles: state.bookmarkArticleReducer.articles, fetching: state.bookmarkArticleReducer.fetching,
+        liked: state.articlesReducer.liked,
+        disliked: state.articlesReducer.disliked,
+        like_status: state.likeDislikeReducer.like_status,
+        dislike_status: state.likeDislikeReducer.dislike_status,
+        likes_count: state.likeDislikeReducer.likes_count,
+        dislikes_count: state.likeDislikeReducer.dislikes_count,
+        likeSuccess: state.likeDislikeReducer.likeSuccess,
+        dislikeSuccess: state.likeDislikeReducer.dislikeSuccess,
+    };
 };
 
 export default connect(
-  mapStateToProps,
-  { deleteArticle, getArticle, rateArticle, averageRating, bookmarkArticle, unBookmarkArticle, getBookmarked, likeFunction, dislikeFunction }
+    mapStateToProps,
+    { deleteArticle, getArticle, rateArticle, averageRating, bookmarkArticle, unBookmarkArticle, getBookmarked, likeFunction, dislikeFunction }
 )(Article);

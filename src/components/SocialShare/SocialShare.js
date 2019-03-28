@@ -3,7 +3,6 @@ import {
     FacebookIcon, FacebookShareButton,
     TwitterIcon, TwitterShareButton,
     EmailIcon, EmailShareButton,
-    LinkedinShareButton, LinkedinIcon,
     WhatsappShareButton, WhatsappIcon
 } from 'react-share';
 import './SocialShare.scss'
@@ -12,7 +11,7 @@ export class SocialShare extends Component {
     render() {
         const shareLink = window.location.href;
         return (
-            <div class="social-btns">
+            <div className="social-btns">
                 <WhatsappShareButton className="share-button" url={shareLink} title="Authors Haven"><WhatsappIcon size={50} /></WhatsappShareButton>
                 <EmailShareButton className="share-button" subject="Here is a nice article from authors haven" body={shareLink}>
                     <EmailIcon size={50}

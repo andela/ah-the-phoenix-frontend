@@ -57,8 +57,8 @@ export class Notifications extends Component {
                     )
         }
         return (
-            <div className={all ? this.props.allstyle : "notifications"}>
-                <div className="notification-list notify-container" >
+            <div className={all ? this.props.allstyle : "notifications animated fadeInUp"}>
+                <div className="notification-list notify-container animated fadeInUp" >
                     {
                         isFetching ? <div className="notifications-load">{"Loading..."}</div> : (
                             <div>{notificationsList}</div>

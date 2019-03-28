@@ -8,7 +8,7 @@ export class ArticlesContainer extends Component {
         const articleList = articles.length !== 0 ? (articles.map(article => {
             const articleUrl = "/articles/" + article.slug
             const userProfileUrl = "/profile/" + article.author.id
-            return <Item key={article.slug} divided>
+            return <Item key={article.slug} className="animated fadeInUp">
                 <Item.Image
                     src={article.image ?
                         article.image.slice(13)

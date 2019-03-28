@@ -18,6 +18,7 @@ import EditArticle from './views/EditArticle/EditArticle';
 import AllNotifications from './components/Notifications/AllNotifications'
 import SingleNotification from './components/Notifications/SingleNotification'
 import Footer from './components/Footer/Footer'
+import SubscribeLink from './components/Home/Subscribe'
 
 class App extends Component {
   render() {

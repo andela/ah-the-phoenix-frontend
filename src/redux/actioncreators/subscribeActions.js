@@ -29,6 +29,7 @@ export const subscribeNotifications = () => dispatch => {
         "Success!",
         "You have successfully subscribed to notifications"
       );
+      window.location.reload()
     })
     .catch(error => {
       dispatch(subscribeFailure());

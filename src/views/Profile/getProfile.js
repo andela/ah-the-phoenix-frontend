@@ -4,7 +4,7 @@ import { getProfile } from '../../redux/actioncreators/userProfile';
 import ProfileCard from '../../components/Profile/ProfileCard';
 import Loader from '../../components/Loader/Loader';
 import { Container, Divider } from 'semantic-ui-react';
-import ProfileMenu from '../../compxonents/Profile/ProfileMenu'
+import ProfileMenu from '../../components/Profile/ProfileMenu'
 import './Profile.scss'
 
 
