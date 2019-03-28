@@ -54,7 +54,9 @@ export const articleReducer = (state = initState, action) => {
           isFetching: action.fetching,
           article: action.article,
           liked: likedbyuser.length > 0,
-          disliked: dislikedbyuser.length > 0
+          disliked: dislikedbyuser.length > 0,
+          likes_count: action.article.likes_count,
+          dislikes_count: action.article.dislikes_count
         }
       }
       return {
@@ -77,7 +79,7 @@ export const articleReducer = (state = initState, action) => {
       return {
         ...state,
         isFetching: action.fetching,
-        articles: action.articles
+        articles: action.articles,
       }
     case DELETE_REQUEST:
       return {

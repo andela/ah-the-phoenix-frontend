@@ -10,45 +10,27 @@ export class LikeDislike extends Component {
         this.props.props.dislikeFunction();
     }
     render() {
-        const {
-            dislikeSuccess, likeSuccess, liked, disliked,
-            likes_count, dislikes_count, like_status, dislike_status
-            , article
+        const { liked, disliked,
+            likes_count, dislikes_count, article
         } = this.props.props;
-        let like_count = null;
-        let dislike_count = null;
-        let like_stat = null;
-        let dislike_stat = null;
 
-        if (likeSuccess || dislikeSuccess) {
-            like_stat = like_status
-            dislike_stat = dislike_status
-            like_count = likes_count
-            dislike_count = dislikes_count;
-
-        } else {
-            like_stat = liked
-            dislike_stat = disliked
-            like_count = article.likes_count
-            dislike_count = article.dislikes_count
-        }
         return (
             <div>
                 <Button as='div' labelPosition='right' disabled={this.props.disabled === "true" ? true : null}>
-                    <Button onClick={this.handleLike} color={!like_stat ? null : "teal"} >
+                    <Button onClick={this.handleLike} color={!liked ? null : "teal"} name="likeBtn" >
                         <Icon name='thumbs up' />
                     </Button>
                     <Label as='a' basic pointing='left'>
-                        {like_count}
+                        {this.props.disabled === "true" ? article.likes_count : likes_count}
                     </Label>
                 </Button>
 
                 <Button as='div' labelPosition='right' disabled={this.props.disabled === "true" ? true : null}>
-                    <Button onClick={this.handleDislike} color={!dislike_stat ? null : "red"}>
+                    <Button onClick={this.handleDislike} color={!disliked ? null : "red"} name="dislikeBtn">
                         <Icon name='thumbs down' />
                     </Button>
                     <Label as='a' basic pointing='left'>
-                        {dislike_count}
+                        {this.props.disabled === "true" ? article.dislikes_count : dislikes_count}
                     </Label>
                 </Button>
             </div>

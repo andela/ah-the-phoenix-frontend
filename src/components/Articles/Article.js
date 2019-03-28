@@ -12,8 +12,8 @@ import { unBookmarkArticle } from "../../redux/actioncreators/unBookmarkArticleA
 import { getBookmarked } from '../../redux/actioncreators/listBookmarkedArticles';
 import { rateArticle } from "../../redux/actioncreators/postRatingActions";
 import { averageRating } from "../../redux/actioncreators/getRatingActions";
-import { likeFunction } from '../../redux/actioncreators/likeDislikeArticle'
-import { dislikeFunction } from '../../redux/actioncreators/likeDislikeArticle'
+import { likeFunction } from '../../redux/actioncreators/getArticleActions'
+import { dislikeFunction } from '../../redux/actioncreators/getArticleActions'
 import SocialShare from '../SocialShare/SocialShare'
 import { ButtonContainer } from './ButtonContainer'
 
@@ -116,16 +116,13 @@ const mapStateToProps = state => {
         isFetching: state.articlesReducer.isFetching,
         article: state.articlesReducer.article,
         user_rating: state.ratingsReducer.user_rating,
+        fetching: state.bookmarkArticleReducer.fetching,
         average_rating: state.ratingsReducer.average_rating,
         favArticles: state.bookmarkArticleReducer.articles,
         liked: state.articlesReducer.liked,
         disliked: state.articlesReducer.disliked,
-        like_status: state.likeDislikeReducer.like_status,
-        dislike_status: state.likeDislikeReducer.dislike_status,
-        likes_count: state.likeDislikeReducer.likes_count,
-        dislikes_count: state.likeDislikeReducer.dislikes_count,
-        likeSuccess: state.likeDislikeReducer.likeSuccess,
-        dislikeSuccess: state.likeDislikeReducer.dislikeSuccess,
+        likes_count: state.articlesReducer.likes_count,
+        dislikes_count: state.articlesReducer.dislikes_count
     };
 };
 
