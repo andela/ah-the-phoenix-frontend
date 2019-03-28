@@ -1,22 +1,17 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Image, Segment, Button, Container, Divider, Item, Icon, Rating } from 'semantic-ui-react';
+import ReactHtmlParser from 'react-html-parser'
+import Loader from '../Loader/Loader';
+import './Article.scss';
 import { getArticle } from "../../redux/actioncreators/getArticleActions";
 import { deleteArticle } from "../../redux/actioncreators/deleteArticle";
+import { bookmarkArticle } from "../../redux/actioncreators/bookmarkArticleActions";
+import { unBookmarkArticle } from "../../redux/actioncreators/unBookmarkArticleActions";
+import { getBookmarked } from '../../redux/actioncreators/listBookmarkedArticles';
 import { rateArticle } from "../../redux/actioncreators/postRatingActions";
-import { averageRating } from "../../redux/actioncreators/getRatingActions";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import {
-    Image,
-    Segment,
-    Button,
-    Container,
-    Divider,
-    Item,
-    Rating
-} from "semantic-ui-react";
-import ReactHtmlParser from "react-html-parser";
-import Loader from "../Loader/Loader";
-import "./Article.scss";
+import { averageRating } from "../../redux/actioncreators/getRatingActions";       
 import { likeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { dislikeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { LikeDislike } from './LikeDislike'
@@ -26,6 +21,7 @@ export class Article extends Component {
     state = {};
     componentDidMount() {
         this.props.getArticle();
+        this.props.getBookmarked();
         this.props.averageRating();
     }
     handleDelete = (e, article_slug) => {
@@ -33,13 +29,42 @@ export class Article extends Component {
         this.props.deleteArticle(article_slug);
     };
 
-    handleClick = (e, article_slug) => {
-        e.preventDefault();
-        this.props.rateArticle(article_slug);
-    };
+    bookmarked = (slug) => {
+        const articleInFavs = this.props.favArticles.filter(article => article.slug === slug)
+        if (articleInFavs.length > 0){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    handleBookmark = (slug) => {
+        if (this.bookmarked(slug)){
+            this.props.unBookmarkArticle()
+        }
+        else {
+            this.props.bookmarkArticle()
+        }
+    }
     handleRate = (e, { rating }) => {
-        this.props.rateArticle(rating);
+      this.props.rateArticle(rating);
     };
+
+    handleClick = (e, article_slug) => {
+      e.preventDefault();
+      this.props.rateArticle(article_slug);
+    };
+
+    iconClass = (slug) => {
+        if (this.props.fetching){
+            return "loading"
+        }
+        if (this.bookmarked(slug)){
+            return "enabled"
+        }
+        return "disabled"
+    }
 
     render() {
         const { article } = this.props
@@ -116,20 +141,24 @@ export class Article extends Component {
                                         Created at: {article.created_at.slice(0, 10)}
                                     </Item.Extra>
                                     <Item.Extra>
-                                        <Rating
-                                            maxRating={5}
-                                            defaultRating={this.props.user_rating}
-                                            icon="star"
-                                            size="massive"
-                                            onRate={this.handleRate}
-                                        />
+                                      <Rating
+                                        maxRating={5}
+                                        defaultRating={this.props.user_rating}
+                                        icon="star"
+                                        size="massive"
+                                        onRate={this.handleRate}
+                                      />
                                     </Item.Extra>
                                     <Item.Extra>
-                                        Average Rating: {this.props.average_rating}
+                                      Average Rating: {this.props.average_rating}
                                     </Item.Extra>
                                     <Item.Extra>
                                         {likecomponent()}
                                     </Item.Extra>
+                                    <br></br>
+                                    <Icon link name="bookmark" className={this.iconClass(article.slug)}
+                                    onClick={() => this.handleBookmark(article.slug)}
+                                    size="large" />
                                 </Item.Content>
                             </Item>
                         </Item.Group>
@@ -148,21 +177,25 @@ export class Article extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isFetching: state.articlesReducer.isFetching,
-        article: state.articlesReducer.article,
-        liked: state.articlesReducer.liked,
-        disliked: state.articlesReducer.disliked,
-        like_status: state.likeDislikeReducer.like_status,
-        dislike_status: state.likeDislikeReducer.dislike_status,
-        likes_count: state.likeDislikeReducer.likes_count,
-        dislikes_count: state.likeDislikeReducer.dislikes_count,
-        likeSuccess: state.likeDislikeReducer.likeSuccess,
-        dislikeSuccess: state.likeDislikeReducer.dislikeSuccess,
-        user_rating: state.ratingsReducer.user_rating,
-        average_rating: state.ratingsReducer.average_rating
-    }
-}
+const mapStateToProps = state => {
+  return {
+    isFetching: state.articlesReducer.fetching,
+    article: state.articlesReducer.article,
+    user_rating: state.ratingsReducer.user_rating,
+    average_rating: state.ratingsReducer.average_rating,
+    favArticles: state.bookmarkArticleReducer.articles, fetching: state.bookmarkArticleReducer.fetching,
+    liked: state.articlesReducer.liked,
+    disliked: state.articlesReducer.disliked,
+    like_status: state.likeDislikeReducer.like_status,
+    dislike_status: state.likeDislikeReducer.dislike_status,
+    likes_count: state.likeDislikeReducer.likes_count,
+    dislikes_count: state.likeDislikeReducer.dislikes_count,
+    likeSuccess: state.likeDislikeReducer.likeSuccess,
+    dislikeSuccess: state.likeDislikeReducer.dislikeSuccess,
+  };
+};
 
-export default connect(mapStateToProps, { deleteArticle, getArticle, rateArticle, averageRating, likeFunction, dislikeFunction })(Article)
+export default connect(
+  mapStateToProps,
+  { deleteArticle, getArticle, rateArticle, averageRating, bookmarkArticle, unBookmarkArticle, getBookmarked, likeFunction, dislikeFunction }
+)(Article);

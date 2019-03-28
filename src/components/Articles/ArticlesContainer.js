@@ -27,7 +27,7 @@ export class ArticlesContainer extends Component {
                         <NavLink to={articleUrl}>...read more</NavLink>
                     </Item.Description>
                     <Item.Extra>
-                        Created at: {article.created_at.slice(0, 10)}
+                        Created at: {article.created_at.slice(0, 11)}
                     </Item.Extra>
                 </Item.Content>
             </Item>
