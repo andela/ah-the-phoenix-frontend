@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getProfile } from '../../redux/actioncreators/userProfile';
-import ProfileCard from '../../components/Profile/ProfileCard';
-import Loader from '../../components/Loader/Loader';
-import { Container, Divider } from 'semantic-ui-react';
-import ProfileMenu from '../../components/Profile/ProfileMenu'
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getProfile } from "../../redux/actioncreators/userProfile";
+import ProfileCard from "../../components/Profile/ProfileCard";
+import Loader from "../../components/Loader/Loader";
+import { Container, Divider } from "semantic-ui-react";
+import ProfileMenu from "../../components/Profile/ProfileMenu";
 
 export class Profile extends Component {
   componentDidMount() {
@@ -40,6 +39,9 @@ const mapStateToProps = state => ({
   profile: state.profileReducer.profile
 });
 
-export default connect(mapStateToProps, {
-  getProfile,
-})(Profile);
+export default connect(
+  mapStateToProps,
+  {
+    getProfile
+  }
+)(Profile);

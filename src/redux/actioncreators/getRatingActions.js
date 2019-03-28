@@ -3,7 +3,7 @@ import {
   GET_RATING_REQUEST,
   GET_RATING_SUCCESS
 } from "../actiontypes";
-import { axiosWithToken, axiosDefault } from "../../utils/axios_config";
+import { axiosDefault } from "../../utils/axios_config";
 
 export const ratingRequest = () => ({
   type: GET_RATING_REQUEST

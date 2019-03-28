@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ArticleContainer from '../Articles/ArticlesContainer';
 import { getBookmarked } from '../../redux/actioncreators/listBookmarkedArticles'
-import { bookmarkArticleReducer } from '../../redux/reducers/bookmarkArticleReducer';
 
 export class ListBookmarkedArticles extends Component {
     componentDidMount = () => {

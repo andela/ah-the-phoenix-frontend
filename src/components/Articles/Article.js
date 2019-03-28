@@ -11,10 +11,10 @@ import { bookmarkArticle } from "../../redux/actioncreators/bookmarkArticleActio
 import { unBookmarkArticle } from "../../redux/actioncreators/unBookmarkArticleActions";
 import { getBookmarked } from '../../redux/actioncreators/listBookmarkedArticles';
 import { rateArticle } from "../../redux/actioncreators/postRatingActions";
-import { averageRating } from "../../redux/actioncreators/getRatingActions";       
+import { averageRating } from "../../redux/actioncreators/getRatingActions";
+import { LikeDislike } from "./LikeDislike";
 import { likeFunction } from '../../redux/actioncreators/likeDislikeArticle'
 import { dislikeFunction } from '../../redux/actioncreators/likeDislikeArticle'
-import { LikeDislike } from './LikeDislike'
 import SocialShare from '../SocialShare/SocialShare'
 
 export class Article extends Component {
@@ -66,38 +66,62 @@ export class Article extends Component {
         return "disabled"
     }
 
-    render() {
-        const { article } = this.props
-        const edit_link = "/articles/" + article.slug + "/edit_article/";
-        const user = JSON.parse(localStorage.getItem("user"))
-        let editdeleteOptions = null
-        if (Object.keys(article).length !== 0 && user) {
-            editdeleteOptions = user.username === article.author.username ? (
-                <Container textAlign='right'>
-                    <Button size="mini" as={Link} to={edit_link} content="Edit" icon="edit" color='blue' />
-                    <Button size="mini" content="Delete" color='red' icon="delete"
-                        onClick={e => { this.handleDelete(e, article.slug) }} />
+  render() {
+    const { article } = this.props;
+    const edit_link = "/articles/" + article.slug + "/edit_article/";
+    const user = JSON.parse(localStorage.getItem("user"));
+    let editdeleteOptions = null;
+    let rating = null;
+    if (Object.keys(article).length !== 0 && user) {
+      editdeleteOptions =
+        user.username === article.author.username ? (
+          <Container textAlign="right">
+            <Button
+              size="mini"
+              as={Link}
+              to={edit_link}
+              content="Edit"
+              icon="edit"
+              color="blue"
+            />
+            <Button
+              size="mini"
+              content="Delete"
+              color="red"
+              icon="delete"
+              onClick={e => {
+                this.handleDelete(e, article.slug);
+              }}
+            />
+          </Container>
+        ) : null;
+      rating = user ? (
+        <Rating
+          maxRating={5}
+          defaultRating={this.props.user_rating}
+          icon="star"
+          size="massive"
+          onRate={this.handleRate}
+        />
+      ) : null;
+    }
+    const articleRender = () => {
+      if (this.props.isFetching) {
+        return (
+          <Loader
+            className={this.props.isFetching ? "active" : "inactive"}
+            size="large"
+          />
+        );
+      }
+      if (!article.title) {
+        return (
+          <div>
+            <h1>Article Not Found</h1>
+          </div>
+        );
+      }
 
-                </Container>
-            ) : (
-                    null
-                )
-        }
-        const articleRender = () => {
-            if (this.props.isFetching) {
-                return (<Loader
-                    className={this.props.isFetching
-                        ? "active"
-                        : "inactive"}
-                    size='large' />)
-            }
-            if (!article.title) {
-                return (
-                    <div>
-                        <h1>Article Not Found</h1>
-                    </div>
-                )
-            }
             const likecomponent = () => {
                 if (user) {
                     return (
@@ -140,15 +164,9 @@ export class Article extends Component {
                                     <Item.Extra>
                                         Created at: {article.created_at.slice(0, 10)}
                                     </Item.Extra>
-                                    <Item.Extra>
-                                      <Rating
-                                        maxRating={5}
-                                        defaultRating={this.props.user_rating}
-                                        icon="star"
-                                        size="massive"
-                                        onRate={this.handleRate}
-                                      />
-                                    </Item.Extra>
+                                    {user.username !== article.author.username ? (
+                                      <Item.Extra>{rating}</Item.Extra>
+                                    ) : null}
                                     <Item.Extra>
                                       Average Rating: {this.props.average_rating}
                                     </Item.Extra>
