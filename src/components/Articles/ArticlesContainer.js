@@ -11,7 +11,7 @@ export class ArticlesContainer extends Component {
             return <Item key={article.slug} className="animated fadeInUp">
                 <Item.Image
                     src={article.image ?
-                        article.image.slice(13)
+                        article.image.replace("image/upload/", "")
                         : "https://www.impossible.sg/wp-content/uploads/2013/11/seo-article-writing.jpg"}
                     size="medium" />
                 <Item.Content>

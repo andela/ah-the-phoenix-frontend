@@ -48,11 +48,7 @@ export class Article extends Component {
         }
         const articleRender = () => {
             if (this.props.isFetching) {
-                return (<Loader
-                    className={this.props.isFetching
-                        ? "active"
-                        : "inactive"}
-                    size='large' />)
+                return <Loader />
             }
             if (!article.title) {
                 return (
@@ -117,11 +113,11 @@ export class Article extends Component {
 
 const mapStateToProps = state => {
     return {
-        isFetching: state.articlesReducer.fetching,
+        isFetching: state.articlesReducer.isFetching,
         article: state.articlesReducer.article,
         user_rating: state.ratingsReducer.user_rating,
         average_rating: state.ratingsReducer.average_rating,
-        favArticles: state.bookmarkArticleReducer.articles, fetching: state.bookmarkArticleReducer.fetching,
+        favArticles: state.bookmarkArticleReducer.articles,
         liked: state.articlesReducer.liked,
         disliked: state.articlesReducer.disliked,
         like_status: state.likeDislikeReducer.like_status,
