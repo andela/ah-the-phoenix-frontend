@@ -4,3 +4,27 @@
     padding: auto;
     width: 100%;
   }
+  .home-page{
+    width: 125%;
+    margin-left: -12.5%;
+    margin-top: -1.5%;
+    margin-bottom: 1%;
+    height: 380px;
+    background: linear-gradient(0.25turn, rgba(204, 204, 204, 0.1), #ffffff, rgba(221, 211, 201, 0.1));
+    background-repeat: no-repeat;
+    
+  }
+  .homepage-img{
+    width:150px;
+    margin: auto;
+    height: 80px;
+    display: block;
+  }
+  .home-title{
+    text-align: center;
+    text-shadow: 1px 3px 10px silver;
+    color: rgb(0, 0, 0);
+  }
+  .home-sub-title{
+    text-align: center;
+  }

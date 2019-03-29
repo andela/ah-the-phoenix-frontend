@@ -9,7 +9,6 @@ import profileReducer from "./profileReducer";
 import { bookmarkArticleReducer } from "./bookmarkArticleReducer";
 import articlesReducer from "./articlesReducer";
 import ratingsReducer from "./ratingsReducer";
-import likeDislikeReducer from '../reducers/LikeDislike'
 import getNotificationsReducer from '../reducers/getNotifications'
 
 
@@ -23,7 +22,6 @@ const rootReducer = combineReducers({
   articlesReducer,
   bookmarkArticleReducer,
   ratingsReducer,
-  likeDislikeReducer,
   getNotificationsReducer,
   toastr: toastrReducer,
 });

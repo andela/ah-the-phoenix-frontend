@@ -18,6 +18,12 @@ export class Home extends Component {
 
     return (
       <div>
+        <div className="home-page">
+          <br></br><br></br><br></br><br></br>
+          <img className="homepage-img animated rubberBand" src="https://res.cloudinary.com/dw675k0f5/image/upload/v1553804705/storo/logo.jpg" alt="logo" />
+          <h1 className="home-title">Welcome to Authors Haven</h1>
+          <h4 className="home-sub-title">A place for the creative at heart</h4>
+          <br></br><br></br></div>
         <ArticleContainer articles={articles} />
       </div>
     )
